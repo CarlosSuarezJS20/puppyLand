@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import Logo from '../Logo/Logo';
+import styles from './MainNavbar.module.css';
 
 class MainNavbar extends Component {
 	render() {
 		return (
-			<div>
+			<div className={styles.Navbar}>
 				<Logo />
 			</div>
 		);

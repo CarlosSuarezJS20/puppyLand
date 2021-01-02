@@ -1,0 +1,10 @@
+.logoContainer {
+	padding: 5px;
+	width: 40px;
+	border-radius: 50px;
+	border: 2px solid rgb(0, 201, 0);
+}
+
+.logoItem {
+	font-size: 1.5rem;
+}
