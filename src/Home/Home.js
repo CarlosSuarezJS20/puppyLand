@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
+import HeroWelcomeSection from '../HeroWelcomeSection/HeroWelcomeSection';
 import MainNavbar from '../MainNavbar/MainNavbar';
+import WhySection from '../WhySection/WhySection';
 import classes from './Home.css';
 
 class Home extends Component {
 	render() {
 		return (
-			<div className={classes.homeContainer}>
+			<header className={classes.homeContainer}>
 				<MainNavbar />
-			</div>
+				<HeroWelcomeSection />
+				<WhySection />
+			</header>
 		);
 	}
 }

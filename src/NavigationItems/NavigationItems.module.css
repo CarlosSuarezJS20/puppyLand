@@ -1,0 +1,75 @@
+.LinksContainer {
+	position: absolute;
+	background: black;
+	top: 0%;
+	width: 100%;
+	height: 0%;
+	overflow: hidden;
+	transition: all 0.3s linear;
+	box-shadow: 0 1px 3px rgba(255, 255, 255, 0.2);
+}
+
+.ShowLinksContainer {
+	height: 255px;
+}
+
+.LogoAndCloseMenu {
+	display: flex;
+	justify-content: space-between;
+	padding-left: 0.5rem;
+}
+
+.CloseMenu {
+	color: rgb(204, 204, 204);
+	margin-top: 1rem;
+	margin-right: 1rem;
+	font-size: 1.8rem;
+}
+
+.CloseMenu:hover {
+	color: #fff;
+	font-size: 1.8rem;
+}
+
+@media (min-width: 780px) {
+	.LogoAndCloseMenu {
+		display: none;
+	}
+
+	.LinksContainer {
+		position: relative;
+		display: flex;
+		padding: 0.5rem;
+		width: 35%;
+		box-shadow: none;
+		background: transparent;
+	}
+}
+
+@media (min-width: 1080px) {
+	.LogoAndCloseMenu {
+		display: none;
+	}
+
+	.LinksContainer {
+		position: relative;
+		display: flex;
+		padding: 0.5rem;
+		width: 30%;
+		background: transparent;
+	}
+}
+
+@media (min-width: 1300px) {
+	.LogoAndCloseMenu {
+		display: none;
+	}
+
+	.LinksContainer {
+		position: relative;
+		display: flex;
+		padding: 0.5rem;
+		width: 25%;
+		background: transparent;
+	}
+}

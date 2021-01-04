@@ -1,10 +1,30 @@
 .logoContainer {
-	padding: 5px;
-	width: 40px;
+	padding: 3.5px;
+	width: 30px;
 	border-radius: 50px;
-	border: 2px solid rgb(0, 201, 0);
+	border: 2px solid rgb(204, 204, 204);
+}
+
+.LogoHolderMain {
+	display: flex;
+	padding: 5px;
+	align-items: center;
+	border-radius: 50px;
 }
 
 .logoItem {
-	font-size: 1.5rem;
+	font-size: 1rem;
+	color: rgb(204, 204, 204);
+}
+
+.LogoTitle {
+	margin-top: 15px;
+	margin-left: 5px;
+	text-transform: capitalize;
+	color: rgb(204, 204, 204);
+	font-size: 1rem;
+}
+
+.LogoTitle span {
+	color: rgb(255, 0, 0);
 }

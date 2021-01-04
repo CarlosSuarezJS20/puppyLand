@@ -1,0 +1,144 @@
+.Hero {
+	display: grid;
+
+	background: linear-gradient(transparent, rgba(0, 0, 0, 0.6)),
+		url('../Assets/Images/pexels-pixabay-372120.jpg') center/cover no-repeat;
+	min-height: 100vh;
+}
+
+.HeroBanner {
+	margin-top: 7.5rem;
+	height: 50px;
+	text-align: center;
+	font-weight: bolder;
+}
+
+.Hero h1 {
+	font-size: 1.5rem;
+	line-height: 0.8;
+	font-weight: 300;
+}
+
+.Hero p {
+	font-size: 0.7rem;
+	font-weight: 300;
+	line-height: 1;
+}
+
+.HeroBanner h1 p {
+	margin-top: 10rem;
+	margin-left: 4rem;
+	height: 50px;
+	line-height: 1.5;
+}
+
+.HeroLink {
+	text-align: center;
+	margin-top: 20rem;
+}
+
+.HeroLink p {
+	text-transform: capitalize;
+	margin-bottom: 3rem;
+}
+
+.HeroLink a {
+	text-align: center;
+	color: rgb(207, 207, 207);
+	text-transform: capitalize;
+	line-height: 0;
+	margin-top: 17rem;
+	border: 2px solid red;
+	border-radius: 5px;
+	padding: 0.4rem 1rem;
+	box-shadow: 0 1px 3px rgba(255, 255, 255, 0.2);
+	transition: all 0.3s linear;
+}
+
+.HeroLink a:hover {
+	text-align: center;
+	color: #fff;
+	text-transform: capitalize;
+	line-height: 0;
+	margin-top: 17rem;
+	border: 2px solid red;
+	border-radius: 5px;
+	padding: 0.4rem 1rem;
+}
+
+/* line-height: 1.5; */
+
+@media (min-width: 780px) {
+	.Hero {
+		grid-template-columns: repeat(auto-fill, minmax(550px, 1fr));
+		background: linear-gradient(transparent, rgba(0, 0, 0, 0.6)),
+			url('../Assets/Images/45362eee6f344eb1d926a659a6cf3f62.jpg') center/cover
+				no-repeat;
+	}
+
+	.Hero h1 {
+		font-size: 3.5rem;
+		line-height: 0.8;
+		font-weight: 300;
+	}
+
+	.Hero p {
+		font-size: 1.7rem;
+		font-weight: 300;
+		line-height: 1;
+	}
+
+	.HeroBanner {
+		text-align: left;
+		margin-left: 7rem;
+		margin-top: 15rem;
+	}
+
+	.HeroLink {
+		text-align: left;
+		margin-top: 20rem;
+		margin-left: 35rem;
+		margin-right: 1rem;
+	}
+
+	.HeroLink a {
+		font-size: 1rem;
+	}
+}
+
+@media (min-width: 1025px) {
+	.HeroBanner {
+		text-align: left;
+		margin-left: 7rem;
+		margin-top: 10rem;
+	}
+
+	.HeroLink {
+		text-align: left;
+		margin-top: 23rem;
+		margin-left: 18rem;
+		margin-right: 1rem;
+	}
+}
+
+@media (min-width: 1300px) {
+	.Hero {
+		grid-template-columns: repeat(auto-fill, minmax(700px, 1fr));
+		background: linear-gradient(transparent, rgba(0, 0, 0, 0.6)),
+			url('../Assets/Images/45362eee6f344eb1d926a659a6cf3f62.jpg') center/cover
+				no-repeat;
+	}
+
+	.HeroBanner {
+		text-align: left;
+		margin-left: 16rem;
+		margin-top: 15rem;
+	}
+
+	.HeroLink {
+		text-align: left;
+		margin-top: 40rem;
+		margin-left: 18rem;
+		margin-right: 1rem;
+	}
+}

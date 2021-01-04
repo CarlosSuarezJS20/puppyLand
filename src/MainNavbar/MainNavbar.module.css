@@ -1,3 +1,32 @@
 .Navbar {
+	position: fixed;
+	width: 100%;
 	background: transparent;
+	display: flex;
+	justify-content: space-between;
+}
+
+.LogoHolder {
+	padding-left: 0.5rem;
+}
+
+.DotsMenu {
+	color: rgb(204, 204, 204);
+	font-size: 1.5rem;
+	margin: auto 1rem;
+	transition: all 0.3s linear;
+}
+
+.DotsMenu:hover {
+	color: #fff;
+}
+
+@media (min-width: 780px) {
+	.DotsMenu {
+		display: none;
+	}
+
+	.LogoHolder {
+		margin-left: 2rem;
+	}
 }
