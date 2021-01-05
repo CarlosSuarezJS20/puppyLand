@@ -21,7 +21,7 @@ class HomeSearchBreedSection extends Component {
 						<option>Doverman</option>
 					</select>
 				</article>
-				<article>
+				<article className={styles.ResultSection}>
 					<div className={styles.ImageHolder}>
 						<img
 							src={puppiesPic}

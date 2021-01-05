@@ -55,3 +55,9 @@
 		position: relative;
 	}
 }
+
+@media (min-width: 1500px) {
+	.ResultSection {
+		margin-left: 9rem;
+	}
+}
