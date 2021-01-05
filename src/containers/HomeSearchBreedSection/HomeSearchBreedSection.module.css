@@ -1,0 +1,57 @@
+.SectionHolder {
+	display: grid;
+	background: hsl(209, 61%, 16%);
+	gap: 2rem 3rem;
+	padding: 2rem;
+	z-index: 90;
+}
+
+.SelectSection {
+	text-align: center;
+}
+
+.ImageHolder {
+	position: relative;
+	border-radius: 5px;
+}
+
+.SelectOption {
+	background: black;
+	border: 1px solid hsla(0, 0%, 81%, 0.61);
+	border-radius: 50px;
+	color: #fff;
+	margin: 1rem 3rem;
+	padding: 0.5rem 2.5rem;
+}
+
+.searchDog {
+	font-size: 5rem;
+	position: absolute;
+	top: 30%;
+	right: 35%;
+	color: hsla(0, 0%, 81%, 0.61);
+}
+
+@media (min-width: 780px) {
+	.SectionHolder {
+		grid-template-columns: 1fr 1fr;
+	}
+
+	.SelectSection {
+		margin-top: 5rem;
+	}
+
+	.SelectOption {
+		margin-top: 1rem;
+		padding: 0.5rem 10.5rem;
+	}
+
+	.PuppiesImage {
+		max-width: 30rem;
+		max-height: 30rem;
+		-o-object-fit: cover;
+		object-fit: cover;
+		border-radius: 5px;
+		position: relative;
+	}
+}

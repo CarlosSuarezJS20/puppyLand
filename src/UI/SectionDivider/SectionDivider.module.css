@@ -1,0 +1,10 @@
+.SectionDivider {
+	background-image: radial-gradient(
+		circle,
+		rgba(248, 54, 54, 0.5) 0%,
+		rgba(210, 208, 208, 0) 90%
+	);
+	border: none;
+	height: 2px;
+	margin-top: 2rem;
+}

@@ -1,6 +1,5 @@
 .Hero {
 	display: grid;
-
 	background: linear-gradient(transparent, rgba(0, 0, 0, 0.6)),
 		url('../Assets/Images/pexels-pixabay-372120.jpg') center/cover no-repeat;
 	min-height: 100vh;

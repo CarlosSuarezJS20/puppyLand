@@ -10,7 +10,7 @@
 }
 
 .ShowLinksContainer {
-	height: 255px;
+	height: 200px;
 }
 
 .LogoAndCloseMenu {
@@ -31,16 +31,26 @@
 	font-size: 1.8rem;
 }
 
+@media (min-width: 410px) {
+	.ShowLinksContainer {
+		height: 255px;
+	}
+}
+
 @media (min-width: 780px) {
 	.LogoAndCloseMenu {
 		display: none;
+	}
+
+	.ShowLinksContainer {
+		height: 50px;
 	}
 
 	.LinksContainer {
 		position: relative;
 		display: flex;
 		padding: 0.5rem;
-		width: 35%;
+		width: 60%;
 		box-shadow: none;
 		background: transparent;
 	}
@@ -55,7 +65,7 @@
 		position: relative;
 		display: flex;
 		padding: 0.5rem;
-		width: 30%;
+		width: 40%;
 		background: transparent;
 	}
 }
@@ -69,7 +79,7 @@
 		position: relative;
 		display: flex;
 		padding: 0.5rem;
-		width: 25%;
+		width: 30%;
 		background: transparent;
 	}
 }

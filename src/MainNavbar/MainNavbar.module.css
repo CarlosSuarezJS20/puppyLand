@@ -4,6 +4,7 @@
 	background: transparent;
 	display: flex;
 	justify-content: space-between;
+	z-index: 1000;
 }
 
 .LogoHolder {
@@ -22,6 +23,15 @@
 }
 
 @media (min-width: 780px) {
+	.Navbar {
+		position: fixed;
+		width: 100%;
+		background: black;
+		display: flex;
+		justify-content: space-between;
+		box-shadow: 0 1px 3px rgba(255, 255, 255, 0.2);
+	}
+
 	.DotsMenu {
 		display: none;
 	}

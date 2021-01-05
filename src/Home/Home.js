@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import HeroWelcomeSection from '../HeroWelcomeSection/HeroWelcomeSection';
 import MainNavbar from '../MainNavbar/MainNavbar';
-import WhySection from '../WhySection/WhySection';
+import MainInfoSection from '../MainInfoSection/MainInfoSection';
 import classes from './Home.css';
+import HomeSearchBreedSection from '../containers/HomeSearchBreedSection/HomeSearchBreedSection';
 
 class Home extends Component {
 	render() {
@@ -10,7 +11,8 @@ class Home extends Component {
 			<header className={classes.homeContainer}>
 				<MainNavbar />
 				<HeroWelcomeSection />
-				<WhySection />
+				<MainInfoSection />
+				<HomeSearchBreedSection />
 			</header>
 		);
 	}

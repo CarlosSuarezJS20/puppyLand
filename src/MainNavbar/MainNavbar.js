@@ -20,7 +20,7 @@ class MainNavbar extends Component {
 
 	render() {
 		return (
-			<div className={styles.Navbar}>
+			<nav className={styles.Navbar}>
 				<div className={styles.LogoHolder}>
 					<Logo />
 				</div>
@@ -34,7 +34,7 @@ class MainNavbar extends Component {
 					open={this.state.showTopBar}
 					clicked={this.hideTopBarHandler}
 				/>
-			</div>
+			</nav>
 		);
 	}
 }

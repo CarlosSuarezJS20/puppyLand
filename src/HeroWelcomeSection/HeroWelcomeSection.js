@@ -3,7 +3,7 @@ import styles from './HeroWelcomeSection.module.css';
 
 const heroWelcomeSection = () => {
 	return (
-		<div className={styles.Hero}>
+		<header className={styles.Hero}>
 			<div className={styles.HeroBanner}>
 				<h1>
 					we are experts <br />
@@ -21,7 +21,7 @@ const heroWelcomeSection = () => {
 				</p>
 				<a href="/#find">find yours</a>
 			</div>
-		</div>
+		</header>
 	);
 };
 

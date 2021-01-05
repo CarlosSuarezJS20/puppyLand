@@ -1,0 +1,39 @@
+.MainHolder {
+	background: hsl(209, 61%, 16%);
+	padding: 2rem;
+	z-index: 90;
+}
+
+.ArticlesHolder {
+	display: grid;
+	gap: 2rem 3rem;
+	margin-top: 3rem;
+}
+
+.Image {
+	max-width: 25rem;
+	max-height: 30rem;
+	-o-object-fit: cover;
+	object-fit: cover;
+	border-radius: var(--radius);
+	position: relative;
+}
+
+.ImageHolder {
+	justify-self: center;
+}
+
+@media (min-width: 780px) {
+	.ArticlesHolder {
+		grid-template-columns: 1fr 1fr;
+	}
+
+	.Image {
+		max-width: 40rem;
+		max-height: 40rem;
+		-o-object-fit: cover;
+		object-fit: cover;
+		border-radius: 5px;
+		position: relative;
+	}
+}

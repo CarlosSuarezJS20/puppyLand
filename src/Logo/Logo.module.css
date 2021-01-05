@@ -7,7 +7,7 @@
 
 .LogoHolderMain {
 	display: flex;
-	padding: 5px;
+
 	align-items: center;
 	border-radius: 50px;
 }
