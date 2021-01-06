@@ -1,1 +1,1 @@
-export { fetchDogsFromServer } from './dogs';
+export { fetchDogsFromServer, fetchOneDogFromServer } from './dogs';

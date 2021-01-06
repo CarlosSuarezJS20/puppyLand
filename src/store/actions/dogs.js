@@ -19,7 +19,7 @@ export const fetchDogsFailed = (errorMsg) => {
 
 export const fetchDogsStarts = () => {
 	return {
-		type: actionTypes.FETCH_DOGS_SUCCESS,
+		type: actionTypes.FETCH_DOGS_START,
 	};
 };
 
@@ -33,13 +33,54 @@ export const fetchDogsFromServer = () => {
 				for (let dog in res.data) {
 					fetchedDogs.push({
 						...res.data[dog],
-						id: dog,
 					});
 				}
 				dispatch(fetchDogsSuccessful(fetchedDogs));
 			})
 			.catch((error) => {
 				dispatch(fetchDogsFailed(error));
+			});
+	};
+};
+
+// FETCHING ONE DOG
+
+export const fetchOneDogSuccessful = (dbDog) => {
+	return {
+		type: actionTypes.FETCH_ONE_DOG_SUCCESS,
+		dog: dbDog,
+	};
+};
+
+export const fetchOneDogFailed = (errorMsg) => {
+	return {
+		type: actionTypes.FETCH_ONE_DOG_FAILED,
+		error: errorMsg,
+	};
+};
+
+export const fetchOneDogStarts = () => {
+	return {
+		type: actionTypes.FETCH_ONE_DOG_START,
+	};
+};
+
+export const fetchOneDogFromServer = (id) => {
+	return (dispatch) => {
+		dispatch(fetchOneDogStarts());
+		axios
+			.get(`/images/search?breed_ids=${id}`)
+			.then((res) => {
+				const fetchedDog = [];
+				for (let dog in res.data) {
+					fetchedDog.push({
+						...res.data[dog],
+					});
+				}
+				dispatch(fetchOneDogSuccessful(fetchedDog));
+			})
+			.catch((error) => {
+				dispatch(fetchOneDogFailed(error));
 			});
 	};
 };

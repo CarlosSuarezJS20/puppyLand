@@ -1,0 +1,13 @@
+.SpinnerHolder {
+	position: fixed;
+	height: 100vh;
+	width: 100vw;
+	background: linear-gradient(150deg, rgb(121, 48, 48) 0%, rgb(0, 0, 0) 61%);
+	opacity: 1;
+	z-index: 10003;
+	transition: all 0.5s linear;
+}
+
+.RemoveSpinner {
+	opacity: 0;
+}
