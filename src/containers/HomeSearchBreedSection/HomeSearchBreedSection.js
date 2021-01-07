@@ -3,6 +3,7 @@ import styles from './HomeSearchBreedSection.module.css';
 import puppiesPic from '../../Assets/Images/puppies.jpeg';
 
 import Spinner from '../../UI/Spinner/Spinner';
+import SectionDivider from '../../UI/SectionDivider/SectionDivider';
 
 import * as actions from '../../store/actions/index';
 import { connect } from 'react-redux';
@@ -53,23 +54,32 @@ class HomeSearchBreedSection extends Component {
 
 		return (
 			<section className={styles.SectionHolder}>
-				<article className={styles.SelectSection}>
-					<h2>do you have a breed in mind?</h2>
-					<select
-						className={styles.SelectOption}
-						onChange={(event) => {
-							this.selectOnChangeHandler(event);
-						}}
-					>
-						<option>no breed selected</option>
-						{dogs}
-					</select>
-				</article>
-				<article className={styles.ResultSection}>
-					<div className={styles.ImageHolder}>{filterImg}</div>
-					<div className={styles.resultInfo}></div>
-					{/* need to work on this */}
-				</article>
+				<div className={styles.GridContainer}>
+					<article className={styles.SelectSection}>
+						<h2>do you have a breed in mind?</h2>
+						<p>
+							Although looks are not important, It can be tricky choosing the
+							perfect dog breed for you! Use our dog breed selector tool to
+							choose any breed you have in mind, or explore the diversity
+							available to you.
+						</p>
+						<select
+							className={styles.SelectOption}
+							onChange={(event) => {
+								this.selectOnChangeHandler(event);
+							}}
+						>
+							<option>no breed selected</option>
+							{dogs}
+						</select>
+					</article>
+					<article className={styles.ResultSection}>
+						<div className={styles.ImageHolder}>{filterImg}</div>
+						<div className={styles.resultInfo}></div>
+						{/* need to work on this */}
+					</article>
+				</div>
+				<SectionDivider />
 			</section>
 		);
 	}

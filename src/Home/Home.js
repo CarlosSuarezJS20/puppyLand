@@ -5,11 +5,25 @@ import MainInfoSection from '../MainInfoSection/MainInfoSection';
 import classes from './Home.css';
 import HomeSearchBreedSection from '../containers/HomeSearchBreedSection/HomeSearchBreedSection';
 import Spinner from '../UI/Loader/Loader';
-
+import * as actions from '../store/actions/index';
 import { connect } from 'react-redux';
 
+import DogsCarousel from '../DogsCarousel/DogsCarousel';
+
 class Home extends Component {
+	componentDidMount() {
+		this.props.onFetchDogs();
+	}
+
 	render() {
+		let dogs;
+
+		if (this.props.dogs) {
+			dogs = this.props.dogs
+				.map((dog) => dog.image)
+				.map((image) => ({ image: image.url, id: image.id }));
+		}
+
 		return (
 			<React.Fragment>
 				<Spinner remove={this.props.loading} />
@@ -19,6 +33,7 @@ class Home extends Component {
 				</header>
 				<MainInfoSection />
 				<HomeSearchBreedSection />
+				<DogsCarousel data={dogs} />
 			</React.Fragment>
 		);
 	}
@@ -32,4 +47,10 @@ const mapStateToProps = (state) => {
 	};
 };
 
-export default connect(mapStateToProps, null)(Home);
+const mapDispatchToProps = (dispatch) => {
+	return {
+		onFetchDogs: () => dispatch(actions.fetchDogsFromServer()),
+	};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

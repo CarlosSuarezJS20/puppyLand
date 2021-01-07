@@ -17,8 +17,8 @@
 
 .SpinnerTwo {
 	color: rgb(226, 226, 226);
-	font-size: 15px;
-	margin: 0.5rem auto;
+	font-size: 10px;
+	margin: 2rem auto;
 	width: 1em;
 	height: 1em;
 	border-radius: 50%;
@@ -34,15 +34,8 @@
 
 @media (min-width: 1020px) {
 	.SpinnerTwo {
-		margin-left: 5rem;
-		margin-top: 10rem;
-	}
-}
-
-@media (min-width: 1500px) {
-	.SpinnerTwo {
-		margin-left: 20rem;
-		margin-top: 10rem;
+		margin: 5rem auto;
+		font-size: 20px;
 	}
 }
 

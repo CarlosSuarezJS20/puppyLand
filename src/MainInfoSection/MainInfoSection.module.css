@@ -1,13 +1,15 @@
 .MainHolder {
 	background: hsl(209, 61%, 16%);
-	padding: 2rem;
+	padding: 2rem 4rem;
 	z-index: 90;
 }
 
 .ArticlesHolder {
 	display: grid;
-	gap: 2rem 3rem;
-	margin-top: 3rem;
+	gap: 2rem 1rem;
+	margin: 0 auto;
+	max-width: 1290px;
+	padding: 2rem 0;
 }
 
 .Image {
@@ -15,15 +17,15 @@
 	max-height: 30rem;
 	-o-object-fit: cover;
 	object-fit: cover;
-	border-radius: var(--radius);
+	border-radius: 5px;
 	position: relative;
 }
 
 .ImageHolder {
-	justify-self: center;
+	justify-self: left;
 }
 
-@media (min-width: 780px) {
+@media (min-width: 880px) {
 	.ArticlesHolder {
 		grid-template-columns: 1fr 1fr;
 	}

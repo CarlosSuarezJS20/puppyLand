@@ -1,0 +1,99 @@
+.CarouselSection {
+	background: hsl(209, 61%, 16%);
+	margin: 0 auto;
+}
+
+.CarouselSection h2 {
+	font-size: 1.2rem;
+	text-align: center;
+}
+
+.CarouselContainer {
+	position: relative;
+	display: flex;
+	margin: 0 auto;
+	max-width: 600px;
+	justify-content: center;
+	align-items: center;
+	padding: 1.5rem 0;
+}
+
+.ImageCaroussel {
+	position: block;
+	margin: 0 auto;
+	align-self: center;
+	-o-object-fit: cover;
+	object-fit: cover;
+	width: 14rem;
+	height: 11rem;
+	margin: 0 1rem;
+	border-radius: 5px;
+}
+
+.LeftArrow {
+	position: absolute;
+	top: 45%;
+	left: 30px;
+	font-size: 2rem;
+	color: red;
+	transition: 1s ease;
+	z-index: 300;
+}
+
+.RightArrow {
+	position: absolute;
+	top: 45%;
+	right: 30px;
+	font-size: 2rem;
+	color: red;
+	z-index: 300;
+	transition: 1s ease;
+}
+
+.LeftArrow:hover,
+.RightArrow:hover {
+	color: rgb(204, 204, 204);
+	transform: scale(1.08);
+}
+
+.Img {
+	opacity: 0;
+	transition: 1s ease;
+}
+
+.Active {
+	opacity: 1;
+	transition: 1s ease;
+	transform: scale(1.08);
+}
+
+@media (min-width: 450px) {
+	.ImageCaroussel {
+		width: 18rem;
+		height: 13rem;
+		margin: 0 1rem;
+		border-radius: 5px;
+	}
+}
+
+@media (min-width: 650px) {
+	.ImageCaroussel {
+		width: 20rem;
+		height: 15rem;
+		margin: 0 1rem;
+		border-radius: 5px;
+	}
+}
+
+@media (min-width: 990px) {
+	.ImageCaroussel {
+		width: 30rem;
+		height: 24rem;
+		margin: 0 1rem;
+		border-radius: 5px;
+	}
+
+	.CarouselContainer {
+		max-width: 770px;
+	}
+}
