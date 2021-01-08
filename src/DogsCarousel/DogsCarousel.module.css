@@ -8,68 +8,31 @@
 	text-align: center;
 }
 
-.CarouselContainer {
-	position: relative;
-	display: flex;
-	margin: 0 auto;
-	max-width: 600px;
-	justify-content: center;
-	align-items: center;
-	padding: 1.5rem 0;
-}
-
 .ImageCaroussel {
-	position: block;
-	margin: 0 auto;
-	align-self: center;
 	-o-object-fit: cover;
 	object-fit: cover;
-	width: 14rem;
+	width: 11rem;
+	margin: 0 -1.5rem;
 	height: 11rem;
-	margin: 0 1rem;
-}
-
-.LeftArrow {
-	position: absolute;
-	top: 45%;
-	left: 30px;
-	font-size: 2rem;
-	color: red;
-	transition: 1s ease;
-	z-index: 300;
-}
-
-.RightArrow {
-	position: absolute;
-	top: 45%;
-	right: 30px;
-	font-size: 2rem;
-	color: red;
-	z-index: 300;
-	transition: 1s ease;
-}
-
-.LeftArrow:hover,
-.RightArrow:hover {
-	color: rgb(204, 204, 204);
-	transform: scale(1.08);
+	border-radius: 10px;
 }
 
 .Img {
-	height: 70px;
-	padding: 0 1rem;
 	opacity: 0.5;
+	margin: 0 auto;
+	transform: scale(0.2);
+	transition: 0.5s ease;
 }
 
 .Active {
 	opacity: 1;
+	transform: scale(0.9);
 }
 
 @media (min-width: 450px) {
 	.ImageCaroussel {
-		width: 18rem;
+		width: 16rem;
 		height: 13rem;
-		margin: 0 1rem;
 		border-radius: 5px;
 	}
 }
@@ -78,7 +41,8 @@
 	.ImageCaroussel {
 		width: 20rem;
 		height: 15rem;
-		margin: 0 1rem;
+		margin: 0 -5rem;
+
 		border-radius: 5px;
 	}
 }
@@ -87,7 +51,6 @@
 	.ImageCaroussel {
 		width: 30rem;
 		height: 24rem;
-		margin: 0 1rem;
 		border-radius: 5px;
 	}
 

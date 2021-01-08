@@ -2,41 +2,16 @@ import React, { Component } from 'react';
 import styles from './DogsCarousel.module.css';
 import '../../src/App.css';
 import SectionDivider from '../UI/SectionDivider/SectionDivider';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import {
-// 	faArrowCircleLeft,
-// 	faArrowCircleRight,
-// } from '@fortawesome/free-solid-svg-icons';
 
 // Slider
 import Slider from 'react-slick';
-import NextImgBtnHandler from '../DogsCarousel/NextImgBtnHandler/NextImgBtnHandler';
-import PrevImgBtnHandler from '../DogsCarousel/PrevImgBtnHandler/PrevImgBtnHandler';
+import NextImgBtnHandler from './PrevImgBtnHandler/PrevImgBtnHandler';
+import PrevImgBtnHandler from './NextImgBtnHandler/NextImgBtnHandler';
 
 class DogsCarousel extends Component {
 	state = {
 		currentImageIndex: 0,
 	};
-
-	// prevImageBtnHandler = () => {
-	// 	const current =
-	// 		this.state.current === 0
-	// 			? this.props.data.length - 1
-	// 			: this.state.current - 1;
-
-	// 	this.setState({
-	// 		current: current,
-	// 	});
-	// };
-
-	// nextImageBtnHandler = () => {
-	// 	this.setState({
-	// 		current:
-	// 			this.state.current === this.props.data.length - 1
-	// 				? 0
-	// 				: this.state.current + 1,
-	// 	});
-	// };
 
 	render() {
 		let dogsImg;
@@ -45,11 +20,11 @@ class DogsCarousel extends Component {
 			className: 'center',
 			centerMode: true,
 			infinite: true,
-			centerPadding: '20px',
+			centerPadding: '0px',
 			slidesToShow: 3,
 			speed: 500,
-			nextArrow: <NextImgBtnHandler />,
-			prevArrow: <PrevImgBtnHandler />,
+			nextArrow: <PrevImgBtnHandler />,
+			prevArrow: <NextImgBtnHandler />,
 			beforeChange: (current, next) =>
 				this.setState({ currentImageIndex: next }),
 		};
@@ -64,25 +39,8 @@ class DogsCarousel extends Component {
 							: styles.Img
 					}
 				>
-					<img src={img.image} alt="dog" />
+					<img src={img.image} alt="dog" className={styles.ImageCaroussel} />
 				</div>
-
-				// <div
-				// 	key={img.id}
-				// 	className={
-				// 		index === this.state.current
-				// 			? [styles.Img, styles.Active].join(' ')
-				// 			: styles.Img
-				// 	}
-				// >
-				// 	{index === this.state.current && (
-				// 		<img
-				// 			src={img.image}
-				// 			alt="dog-img"
-				// 			className={styles.ImageCaroussel}
-				// 		/>
-				// 	)}
-				// </div>
 			));
 		}
 
@@ -92,19 +50,6 @@ class DogsCarousel extends Component {
 				<div className="Slider-container">
 					<Slider {...settings}>{dogsImg}</Slider>
 				</div>
-				{/* <div className={styles.CarouselContainer}>
-					<FontAwesomeIcon
-						icon={faArrowCircleLeft}
-						className={styles.LeftArrow}
-						onClick={this.prevImageBtnHandler}
-					/>
-					<FontAwesomeIcon
-						icon={faArrowCircleRight}
-						className={styles.RightArrow}
-						onClick={this.nextImageBtnHandler}
-					/>
-					{dogsImg}
-				</div> */}
 				<SectionDivider />
 			</section>
 		);

@@ -1,13 +1,14 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowCircleRight } from '@fortawesome/free-solid-svg-icons';
+import '../../App.css';
 
-const nextImgBtnHandler = (props) => {
+const rightImgBtnHandler = (props) => {
 	return (
 		<div onClick={props.onClick}>
-			<FontAwesomeIcon icon={faArrowCircleRight} />
+			<FontAwesomeIcon icon={faArrowCircleRight} className="Right-arrow" />
 		</div>
 	);
 };
 
-export default nextImgBtnHandler;
+export default rightImgBtnHandler;

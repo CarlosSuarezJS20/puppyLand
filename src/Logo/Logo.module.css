@@ -1,5 +1,6 @@
 .logoContainer {
 	padding: 3.5px;
+
 	width: 30px;
 	border-radius: 50px;
 	border: 2px solid rgb(204, 204, 204);
@@ -27,4 +28,10 @@
 
 .LogoTitle span {
 	color: rgb(255, 0, 0);
+}
+
+@media (min-width: 780px) {
+	.logoContainer {
+		margin-left: 3rem;
+	}
 }

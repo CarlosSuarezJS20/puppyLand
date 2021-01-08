@@ -1,3 +1,6 @@
+.DividerHolder {
+	padding: 1rem 0;
+}
 .SectionDivider {
 	background-image: radial-gradient(
 		circle,
@@ -6,5 +9,4 @@
 	);
 	border: none;
 	height: 2px;
-	margin-top: 2rem;
 }

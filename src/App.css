@@ -2,7 +2,70 @@
 @import '~slick-carousel/slick/slick-theme.css';
 
 .Slider-container {
-	width: 80%;
+	width: 90%;
 	margin: 0 auto;
-	height: 400px;
+}
+
+.Left-arrow {
+	position: absolute;
+	top: 45%;
+	left: 30px;
+	font-size: 2rem;
+	color: red;
+	transition: 1s ease;
+	z-index: 300;
+}
+
+.Right-arrow {
+	position: absolute;
+	top: 45%;
+	right: 30px;
+	font-size: 2rem;
+	color: red;
+	z-index: 300;
+	transition: 1s ease;
+}
+
+.Left-arrow:hover,
+.Right-arrow:hover {
+	color: rgb(204, 204, 204);
+	transform: scale(1.08);
+}
+
+@media (min-width: 450px) {
+	.Slider-container {
+		width: 100%;
+		margin: 0 auto;
+		height: 500px;
+	}
+
+	.ImageCaroussel {
+		width: 18rem;
+		height: 13rem;
+		border-radius: 5px;
+	}
+}
+
+@media (min-width: 650px) {
+	.Slider-container {
+		width: 80%;
+		margin: 0 auto;
+		height: 500px;
+	}
+}
+
+@media (min-width: 990px) {
+	.Slider-container {
+		width: 80%;
+		margin: 0 auto;
+		height: 500px;
+	}
+}
+
+@media (min-width: 1300px) {
+	.Slider-container {
+		width: 55%;
+		margin: 0 auto;
+		height: 500px;
+	}
 }
