@@ -1,0 +1,8 @@
+@import '~slick-carousel/slick/slick.css';
+@import '~slick-carousel/slick/slick-theme.css';
+
+.Slider-container {
+	width: 80%;
+	margin: 0 auto;
+	height: 400px;
+}

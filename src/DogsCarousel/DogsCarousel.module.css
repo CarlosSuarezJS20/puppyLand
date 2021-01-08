@@ -27,7 +27,6 @@
 	width: 14rem;
 	height: 11rem;
 	margin: 0 1rem;
-	border-radius: 5px;
 }
 
 .LeftArrow {
@@ -57,14 +56,13 @@
 }
 
 .Img {
-	opacity: 0;
-	transition: 1s ease;
+	height: 70px;
+	padding: 0 1rem;
+	opacity: 0.5;
 }
 
 .Active {
 	opacity: 1;
-	transition: 1s ease;
-	transform: scale(1.08);
 }
 
 @media (min-width: 450px) {
