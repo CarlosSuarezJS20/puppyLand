@@ -9,6 +9,7 @@ import * as actions from '../store/actions/index';
 import { connect } from 'react-redux';
 
 import DogsCarousel from '../DogsCarousel/DogsCarousel';
+import MainFooter from '../MainFooter/MainFooter';
 
 class Home extends Component {
 	componentDidMount() {
@@ -34,6 +35,7 @@ class Home extends Component {
 				<MainInfoSection />
 				<HomeSearchBreedSection />
 				<DogsCarousel data={dogs} />
+				<MainFooter />
 			</React.Fragment>
 		);
 	}

@@ -1,0 +1,115 @@
+.MainFooter {
+	background: #131517;
+	color: rgb(204, 204, 204);
+	font-size: 0.9rem;
+	padding: 1rem;
+}
+
+.MainFooterTop header {
+	font-size: 1rem;
+	margin-bottom: 2rem;
+}
+
+.MainFooterTop h2 {
+	letter-spacing: 0.4rem;
+	text-transform: uppercase;
+}
+
+.MainFooterTopHeaderNav {
+	align-items: center;
+	display: grid;
+	grid-template-columns: repeat(2, 70px);
+}
+
+.Item {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+}
+
+.FooterTitle {
+	color: rgba(255, 255, 255, 0.7);
+	font-size: 0.9rem;
+	font-weight: normal;
+}
+
+.MyPage {
+	color: blue;
+	font-size: 0.9rem;
+	font-weight: bold;
+}
+
+.CopyRights {
+	color: rgba(255, 255, 255, 0.7);
+	line-height: 1.5rem;
+	margin-top: 2rem;
+}
+
+.CopyRights a {
+	color: #fff;
+	font-weight: bold;
+}
+
+.BottomFooter {
+	align-items: center;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	margin-top: 2rem;
+}
+
+.SectionOne {
+	text-align: center;
+}
+
+.SectionTwo {
+	text-align: right;
+}
+
+.SocialIcon {
+	background-color: rgba(255, 255, 255, 0.7);
+	border-radius: 50%;
+	fill: black;
+	height: auto;
+	margin: 0 10px;
+	padding: 5px;
+	transition: background-color 0.4s;
+	width: 20px;
+}
+
+@media (min-width: 600px) {
+	.MainFooter {
+		padding: 4rem;
+	}
+
+	.SocialIcon {
+		padding: 8px;
+		width: 25px;
+	}
+}
+
+@media (min-width: 900px) {
+	.MainFooter {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		padding: 7rem;
+	}
+
+	.BottomFooter {
+		grid-template-columns: 1fr;
+		justify-items: right;
+	}
+
+	.SectionOne {
+		align-self: flex-start;
+		width: 190px;
+	}
+
+	.SectionTwo {
+		align-self: flex-end;
+	}
+}
+
+@media only screen and (min-width: 1400px) {
+	.main-footer {
+		padding: 10rem 12rem;
+	}
+}

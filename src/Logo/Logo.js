@@ -10,7 +10,7 @@ const logo = () => {
 				<FontAwesomeIcon icon={faPaw} className={styles.logoItem} />
 			</div>
 			<p className={styles.LogoTitle}>
-				puppy<span>Land</span>
+				puppy<span>Finder</span>
 			</p>
 		</div>
 	);
