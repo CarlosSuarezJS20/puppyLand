@@ -76,6 +76,25 @@
 	}
 }
 
+@media (min-width: 750px) {
+	.ImageCaroussel {
+		width: 20rem;
+		height: 15rem;
+		margin: 0 -4rem;
+		border-radius: 5px;
+	}
+
+	.CarouselSection p {
+		width: 700px;
+		text-align: center;
+	}
+
+	.SliderContainer {
+		width: 600px;
+		margin: 0 auto;
+	}
+}
+
 @media (min-width: 990px) {
 	.ImageCaroussel {
 		width: 30rem;
