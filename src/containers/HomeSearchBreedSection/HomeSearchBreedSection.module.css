@@ -2,7 +2,7 @@
 	background: hsl(209, 61%, 16%);
 	align-content: center;
 	z-index: 90;
-	padding: 1rem;
+	padding: 1rem 2rem;
 }
 
 .GridContainer {

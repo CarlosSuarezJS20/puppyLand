@@ -1,6 +1,7 @@
 .CarouselSection {
 	background: hsl(209, 61%, 16%);
 	margin: 0 auto;
+	padding: 0 2rem;
 }
 
 .CarouselSection h2 {
@@ -10,7 +11,6 @@
 }
 
 .CarouselSection p {
-	width: 350px;
 	text-align: left;
 	margin: 0 auto;
 }
@@ -19,7 +19,7 @@
 	-o-object-fit: cover;
 	object-fit: cover;
 	width: 11rem;
-	margin: 0 -1.5rem;
+	margin: 0 -2.3rem;
 	height: 11rem;
 	border-radius: 10px;
 }
