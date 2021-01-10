@@ -10,6 +10,9 @@ import { connect } from 'react-redux';
 
 import DogsCarousel from '../DogsCarousel/DogsCarousel';
 import MainFooter from '../MainFooter/MainFooter';
+ 
+// Deal With Errors
+// Build the Filter Page
 
 class Home extends Component {
 	componentDidMount() {
