@@ -3,11 +3,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaw } from '@fortawesome/free-solid-svg-icons';
 import styles from './Logo.module.css';
 
-const logo = () => {
+const logo = (props) => {
+	if (props.logoClass) {
+	}
+
 	return (
 		<div className={styles.LogoHolderMain}>
-			<div className={styles.logoContainer}>
-				<FontAwesomeIcon icon={faPaw} className={styles.logoItem} />
+			<div className={styles.LogoContainer}>
+				<FontAwesomeIcon icon={faPaw} className={styles.LogoItem} />
 			</div>
 			<p className={styles.LogoTitle}>
 				puppy<span>Finder</span>

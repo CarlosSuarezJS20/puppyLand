@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './MainFooter.module.css';
+import Logo from '../Logo/Logo';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
@@ -10,7 +11,7 @@ const mainFooter = () => {
 			<footer className={styles.MainFooter}>
 				<section className={styles.MainFooterTop}>
 					<header>
-						<h2>Puppy Finder</h2>
+						<h3>API: The Dogs API</h3>
 						<nav className={styles.MainFooterTopHeaderNav}>
 							<a>Home</a>
 							<a>
@@ -52,7 +53,7 @@ const mainFooter = () => {
 				</section>
 
 				<section className={styles.BottomFooter}>
-					<h2 className={styles.SectionOne}>API: The Dogs API</h2>
+					<Logo logoClass="Footer" />
 
 					<div className={styles.SectionTwo}>
 						<a

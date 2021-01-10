@@ -4,7 +4,7 @@ import styles from './NavigationItems.module.css';
 import Logo from '../Logo/Logo';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 const navigationItems = (props) => {
 	let containerClasses = [styles.LinksContainer];
@@ -23,10 +23,8 @@ const navigationItems = (props) => {
 					onClick={props.clicked}
 				/>
 			</div>
-			<NavigationItem>why a puppy?</NavigationItem>
-			<NavigationItem>about</NavigationItem>
+			<NavigationItem>home</NavigationItem>
 			<NavigationItem>find a puppy</NavigationItem>
-			<NavigationItem>contact</NavigationItem>
 		</ul>
 	);
 };

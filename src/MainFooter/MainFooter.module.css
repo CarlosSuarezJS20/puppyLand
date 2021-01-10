@@ -42,6 +42,7 @@
 	color: rgba(255, 255, 255, 0.7);
 	line-height: 1.5rem;
 	margin-top: 2rem;
+	margin-bottom: 0;
 }
 
 .CopyRights a {
@@ -71,7 +72,6 @@
 	height: auto;
 	margin: 0 10px;
 	padding: 5px;
-	transition: background-color 0.4s;
 	width: 20px;
 }
 
@@ -89,8 +89,9 @@
 @media (min-width: 900px) {
 	.MainFooter {
 		display: grid;
+		padding-left: 8rem;
+		padding-right: 8rem;
 		grid-template-columns: 1fr 1fr;
-		padding: 7rem;
 	}
 
 	.BottomFooter {
@@ -106,10 +107,23 @@
 	.SectionTwo {
 		align-self: flex-end;
 	}
+
+	.SocialIcon {
+		background-color: rgba(255, 255, 255, 0.7);
+		border-radius: 50%;
+		fill: black;
+		height: auto;
+		margin: 0 10px;
+		padding: 5px;
+		width: 30px;
+	}
 }
 
-@media only screen and (min-width: 1400px) {
-	.main-footer {
-		padding: 10rem 12rem;
+@media (min-width: 1100px) {
+	.MainFooter {
+		padding: 2rem 22rem;
+	}
+	.Item {
+		width: 400px;
 	}
 }

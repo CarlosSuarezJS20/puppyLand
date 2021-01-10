@@ -1,6 +1,6 @@
 .MainHolder {
 	background: hsl(209, 61%, 16%);
-	padding: 2rem 4rem;
+	padding: 2rem 1rem;
 	z-index: 90;
 }
 
@@ -26,6 +26,10 @@
 }
 
 @media (min-width: 880px) {
+	.ImageHolder {
+		align-self: center;
+	}
+
 	.ArticlesHolder {
 		grid-template-columns: 1fr 1fr;
 	}

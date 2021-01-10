@@ -1,6 +1,5 @@
-.logoContainer {
+.LogoContainer {
 	padding: 3.5px;
-
 	width: 30px;
 	border-radius: 50px;
 	border: 2px solid rgb(204, 204, 204);
@@ -8,12 +7,11 @@
 
 .LogoHolderMain {
 	display: flex;
-
 	align-items: center;
 	border-radius: 50px;
 }
 
-.logoItem {
+.LogoItem {
 	font-size: 1rem;
 	color: rgb(204, 204, 204);
 }

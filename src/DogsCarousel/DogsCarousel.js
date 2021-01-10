@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import styles from './DogsCarousel.module.css';
-import '../../src/App.css';
-import SectionDivider from '../UI/SectionDivider/SectionDivider';
+import '../DogsCarousel/Carousel.css';
 
 // Slider
 import Slider from 'react-slick';
@@ -46,11 +45,22 @@ class DogsCarousel extends Component {
 
 		return (
 			<section className={styles.CarouselSection}>
+				<p>
+					{' '}
+					We urge anyone thinking about getting a dog to do their research
+					before welcoming a puppy into their life. Having a bouncy, happy,
+					playful puppy is a very enjoyable experience and dog ownership can be
+					very rewarding, but it is a lot of hard work, and a lifetime
+					commitment which can sometimes be forgotten in all the excitement! The
+					key things to think about when you first decide you want a pup are
+					which breed would best suit your lifestyle, the financial costs of dog
+					ownership, who will care for your dog if you go to work or have
+					holidays booked and training classes.
+				</p>
 				<h2>Some posers here...</h2>
-				<div className="Slider-container">
+				<div className={styles.SliderContainer}>
 					<Slider {...settings}>{dogsImg}</Slider>
 				</div>
-				<SectionDivider />
 			</section>
 		);
 	}

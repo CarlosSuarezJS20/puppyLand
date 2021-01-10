@@ -58,7 +58,7 @@ class HomeSearchBreedSection extends Component {
 					<article className={styles.SelectSection}>
 						<h2>do you have a breed in mind?</h2>
 						<p>
-							Although looks are not important, It can be tricky choosing the
+							Although looks are not important, it can be tricky choosing the
 							perfect dog breed for you! Use our dog breed selector tool to
 							choose any breed you have in mind, or explore the diversity
 							available to you.
