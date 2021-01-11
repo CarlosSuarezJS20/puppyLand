@@ -16,7 +16,7 @@
 }
 
 .ShowLinksContainer {
-	height: 200px;
+	height: 150px;
 }
 
 .LogoAndCloseMenu {
@@ -39,7 +39,7 @@
 
 @media (min-width: 410px) {
 	.ShowLinksContainer {
-		height: 255px;
+		height: 200px;
 	}
 }
 

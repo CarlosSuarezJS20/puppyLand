@@ -21,6 +21,17 @@
 	grid-template-columns: repeat(2, 70px);
 }
 
+.MainFooterTopHeaderNav a {
+	color: rgb(204, 204, 204);
+	transition: 1s ease;
+}
+
+.MainFooterTopHeaderNav a:hover {
+	color: #fff;
+	text-decoration: underline;
+	transform: scale(1.1);
+}
+
 .Item {
 	display: grid;
 	grid-template-columns: 1fr 1fr;

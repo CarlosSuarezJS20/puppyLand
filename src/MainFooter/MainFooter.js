@@ -13,8 +13,8 @@ const mainFooter = () => {
 					<header>
 						<h3>API: The Dogs API</h3>
 						<nav className={styles.MainFooterTopHeaderNav}>
-							<a>Home</a>
-							<a>
+							<a href="/#home">Home</a>
+							<a href="/#search">
 								<FontAwesomeIcon icon={faSearch} />
 							</a>
 						</nav>

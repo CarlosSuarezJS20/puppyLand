@@ -12,7 +12,7 @@
 .NavigationItem a:hover {
 	transform: scale(1.2);
 	font-weight: bold;
-	color: #fff;
+	color: white;
 	text-decoration: underline;
 }
 

@@ -1,0 +1,152 @@
+.FindADogFiltersSection {
+	background: rgb(39, 39, 39);
+	padding-top: 5rem;
+}
+
+.FindADogFiltersSection h2 {
+	text-align: center;
+	text-transform: uppercase;
+}
+
+.FidDogFiltersHolder {
+	padding-top: 1rem;
+	max-width: 1190px;
+	margin: 0 auto;
+}
+
+.FilterBtn {
+	display: block;
+	font-family: 'Times New Roman', Times, serif;
+	color: #fff;
+	font-weight: 100;
+	text-align: center;
+	font-size: 1.5rem;
+	text-transform: capitalize;
+	outline: none;
+	background: transparent;
+	border: 2px solid #fff;
+	border-radius: 40px;
+	padding: 0.5rem 1rem;
+	width: 200px;
+	margin: 1rem auto;
+	transition: all 0.3s linear;
+}
+
+.FilterBtn:hover {
+	color: rgb(39, 39, 39);
+	font-size: 1.5rem;
+	background: #fff;
+}
+
+.FormHolder {
+	max-width: 1190px;
+	padding: 2rem 2rem;
+	margin: 0 auto;
+	background: rgb(228, 228, 228);
+	border-radius: 10px;
+}
+
+.FormHeader {
+	display: flex;
+	width: 100%;
+	align-items: center;
+	justify-content: space-between;
+	border-bottom: 2px solid rgb(194, 194, 194);
+	padding-bottom: 1rem;
+}
+
+.FormHeader h2 {
+	font-size: 1rem;
+	color: rgb(39, 39, 39);
+	margin-bottom: 0;
+}
+
+.ClearSearch {
+	font-family: 'Times New Roman', Times, serif;
+	color: rgb(39, 39, 39);
+	font-size: 1.3rem;
+	text-transform: capitalize;
+	outline: none;
+	background: transparent;
+	border: none;
+	transition: all 0.3s linear;
+	margin-bottom: 0.3rem;
+}
+
+.ClearSearch:hover {
+	color: rgb(155, 155, 155);
+	text-decoration: underline;
+}
+
+.CloseFilterSectionBtn {
+	color: rgb(39, 39, 39);
+	font-size: 1.2rem;
+}
+
+.CloseFilterSectionBtn:hover {
+	color: rgb(155, 155, 155);
+}
+
+.OptionsSection {
+	padding: 1rem 0;
+}
+
+.FilterDivider {
+	background: black;
+	width: 100vw;
+	padding: 1px;
+	opacity: 0.1;
+}
+
+.OptionsHolder {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(360px, 1.5fr));
+	padding: 1rem 0;
+}
+
+.OptionsSection input {
+	display: inline-block;
+	margin: 1rem;
+	width: 20px;
+	height: 20px;
+}
+
+.OptionsSection label {
+	color: rgb(39, 39, 39);
+	font-size: 1.2rem;
+}
+
+.CategoriesHolder {
+	padding: 2rem 0;
+}
+
+.FormHolder h3 {
+	color: rgb(39, 39, 39);
+}
+
+.SearchBtnHolder {
+	width: 100%;
+	text-align: right;
+}
+
+.SearchBtn {
+	font-family: 'Times New Roman', Times, serif;
+	color: rgb(39, 39, 39);
+	font-weight: 100;
+	text-align: center;
+	font-size: 1.2rem;
+	text-transform: capitalize;
+	outline: none;
+	background: transparent;
+	border: 2px solid rgb(39, 39, 39);
+	border-radius: 40px;
+	padding: 0.2rem 0.5rem;
+	width: 120px;
+	margin: 1rem auto;
+	transition: all 0.3s linear;
+}
+
+.SearchBtn:hover {
+	color: #fff;
+	background: rgb(39, 39, 39);
+}
