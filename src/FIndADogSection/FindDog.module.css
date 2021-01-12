@@ -1,6 +1,7 @@
 .FindADogFiltersSection {
 	background: rgb(39, 39, 39);
 	padding-top: 5rem;
+	padding-bottom: 1rem;
 }
 
 .FindADogFiltersSection h2 {
@@ -39,11 +40,16 @@
 }
 
 .FormHolder {
+	position: absolute;
+	top: 0;
+	display: block;
 	max-width: 1190px;
 	padding: 2rem 2rem;
 	margin: 0 auto;
 	background: rgb(228, 228, 228);
 	border-radius: 10px;
+	opacity: 0;
+	transform: translateY(-100%);
 }
 
 .FormHeader {
@@ -91,17 +97,17 @@
 	padding: 1rem 0;
 }
 
-.FilterDivider {
-	background: black;
-	width: 100vw;
-	padding: 1px;
-	opacity: 0.1;
+.OptionsHolder {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(200px, 1.5fr));
+	padding: 1rem 0;
 }
 
-.OptionsHolder {
+.OptionsHolderAdvanced {
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(360px, 1.5fr));
 	padding: 1rem 0;
+	display: none;
 }
 
 .OptionsSection input {
@@ -113,15 +119,33 @@
 
 .OptionsSection label {
 	color: rgb(39, 39, 39);
-	font-size: 1.2rem;
+	font-size: 1rem;
+	text-transform: capitalize;
 }
 
 .CategoriesHolder {
 	padding: 2rem 0;
+	border-bottom: 2px solid rgb(194, 194, 194);
 }
 
 .FormHolder h3 {
 	color: rgb(39, 39, 39);
+}
+
+.AdvanceFiltersBtnHolder {
+	width: 100%;
+	text-align: right;
+}
+
+.AdvanceFiltersBtnHolder button {
+	outline: none;
+	border: none;
+	font-size: 1rem;
+	text-transform: capitalize;
+}
+
+.AdvanceFiltersBtnHolder button:hover {
+	color: rgb(155, 155, 155);
 }
 
 .SearchBtnHolder {
@@ -131,14 +155,13 @@
 
 .SearchBtn {
 	font-family: 'Times New Roman', Times, serif;
-	color: rgb(39, 39, 39);
+	color: #fff;
 	font-weight: 100;
 	text-align: center;
 	font-size: 1.2rem;
 	text-transform: capitalize;
 	outline: none;
-	background: transparent;
-	border: 2px solid rgb(39, 39, 39);
+	background: rgb(39, 39, 39);
 	border-radius: 40px;
 	padding: 0.2rem 0.5rem;
 	width: 120px;
@@ -147,6 +170,30 @@
 }
 
 .SearchBtn:hover {
-	color: #fff;
+	transform: scale(0.9);
+}
+
+.ShowForm {
+	position: relative;
+	opacity: 1;
+	animation: slideUp 0.3s ease-in;
+	transform: none;
+}
+
+.Show {
+	display: grid;
+}
+
+.Dogs {
 	background: rgb(39, 39, 39);
+	height: 100vh;
+}
+
+@keyframes slideUp {
+	0% {
+		transform: skewY(0deg) translateY(1000px);
+	}
+	100% {
+		transform: skewY(0deg);
+	}
 }

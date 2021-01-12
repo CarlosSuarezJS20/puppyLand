@@ -12,6 +12,7 @@ import { connect } from 'react-redux';
 // import MainFooter from '../MainFooter/MainFooter';
 import FindADogSection from '../FIndADogSection/FindADogSection';
 
+// THINGS TO DO:
 // Deal With Errors
 // Build the Filter Page
 // Fix css in the hero page

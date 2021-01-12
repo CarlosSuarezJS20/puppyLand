@@ -15,24 +15,24 @@ export const filterBuilder = (type, filters) => {
 					// eslint-disable-next-line array-callback-return
 					return;
 				}
+
 				return (
-					<div>
-						<input type="checkbox" name="breedFor" value={each} />
+					<div key={each}>
+						<input type="checkbox" name="breedFor" value={each.slice(0, 4)} />
 						<label>{each}</label>
 					</div>
 				);
 			});
 		case 'temperament':
-			console.log(filters);
 			return filters.map((each) => {
 				if (!each) {
 					// eslint-disable-next-line array-callback-return
 					return;
 				}
 				return (
-					<div>
+					<div key={each}>
 						<input type="checkbox" name="temperament" value={each} />
-						<label>{each}</label>
+						<label>{each[0].toUpperCase() + each.substring(1)}</label>
 					</div>
 				);
 			});

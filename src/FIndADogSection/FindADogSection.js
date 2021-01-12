@@ -19,51 +19,138 @@ import {
 class FindADogSection extends Component {
 	state = {
 		dogFilter: '',
+		formIsOpen: false,
+		advancedFilterRequested: false,
 	};
 
 	componentDidMount() {
 		this.props.onFetchDogs();
 	}
 
+	openFormHandler = () => {
+		this.setState({ formIsOpen: true });
+	};
+
+	closeFormHandler = () => {
+		this.setState({ formIsOpen: false });
+	};
+
+	openandCloseAdvancedSearch = () => {
+		if (this.state.advancedFilterRequested) {
+			this.setState({ advancedFilterRequested: false });
+		} else {
+			this.setState({ advancedFilterRequested: true });
+		}
+	};
+
+	closeAdvancedSearch = () => {
+		this.setState({ advancedFilterRequested: false });
+	};
+
+	clearFiltersHandler = () => {
+		console.log('click');
+	};
+
+	searchRequestHandler = () => {
+		this.setState({ formIsOpen: false });
+	};
+
 	render() {
 		let breedForFilters;
-		let temperamentFilter;
+		let temperamentMainFilters;
+		let temperamentAdvancedFilter;
 
 		if (this.props.dogs) {
-			const initialDogsBreedForFilter = this.props.dogs.map(
-				(dog) => dog.bred_for
-			);
-			const initialTemperamentFilter = this.props.dogs.map(
-				(dog) => dog.temperament
-			);
+			//filters data before allocating it to elements BREED FOR
+			const initialDogsBreedForFilter = this.props.dogs
+				.map((dog) => dog.bred_for)
+				.join(' , ')
+				.split(' ')
+				.filter((word) => {
+					return word.endsWith('ing');
+				})
+				.map((word) => word.toLowerCase())
+				.filter((word) => word !== 'driving')
+				.sort();
 
-			const initialDogsBreedWithoutDuplicates = removeDublicates(
+			const dogsBreedWithoutDuplicates = removeDublicates(
 				initialDogsBreedForFilter
 			);
 
+			// filters data before allocating it to elements TEMPERAMENT
+
+			const initialTemperamentFilter = this.props.dogs
+				.map((dog) => dog.temperament)
+				.join(' , ')
+				.split(' ')
+				.filter((word) => word.length > 3)
+				.map((word) => word.replace(',', '').toLowerCase())
+				.sort();
+
+			// SPLITS MAIN AND ADVANCED FILTERS IN TEMPERAMENT
+
+			const advancedTemperamentFilters = initialTemperamentFilter.filter(
+				(word) =>
+					word !== 'stubborn' &&
+					word !== 'playful' &&
+					word !== 'active' &&
+					word !== 'friendly' &&
+					word !== 'intelligent' &&
+					word !== 'gentle' &&
+					word !== 'gay'
+			);
+
+			const mainTemperamentsFilters = initialTemperamentFilter.filter(
+				(word) =>
+					word === 'stubborn' ||
+					word === 'playful' ||
+					word === 'active' ||
+					word === 'friendly' ||
+					word === 'intelligent' ||
+					word === 'gentle'
+			);
+
+			//REMOVES DUPLICATES FROM MAIN LIST
+
+			const mainTemperamentsFiltersNoDuplicates = removeDublicates(
+				mainTemperamentsFilters
+			);
+
+			const advancedTemperamentFiltersNoDuplicates = removeDublicates(
+				advancedTemperamentFilters
+			);
+
+			//BUILDS RENDER ELEMENTS
+
 			breedForFilters = filterBuilder(
 				'breedForFilter',
-				initialDogsBreedWithoutDuplicates
-			);
-			temperamentFilter = filterBuilder(
-				'temperament',
-				initialTemperamentFilter
+				dogsBreedWithoutDuplicates
 			);
 
-			// breedForFilters = initialDogsBreedWithoutDuplicates.map((eachFor) => {
-			// 	if (!eachFor) {
-			// 		// eslint-disable-next-line array-callback-return
-			// 		return;
-			// 	}
-			// 	return (
-			// 		<div className={styles.InputHolder}>
-			// 			<input type="checkbox" name="breedFor" value={eachFor} />
-			// 			<label>{eachFor}</label>
-			// 		</div>
-			// 	);
-			// });
+			temperamentMainFilters = filterBuilder(
+				'temperament',
+				mainTemperamentsFiltersNoDuplicates
+			);
+
+			temperamentAdvancedFilter = filterBuilder(
+				'temperament',
+				advancedTemperamentFiltersNoDuplicates
+			);
 		}
 
+		// CLASSES
+
+		let formClass = [styles.FormHolder];
+		if (this.state.formIsOpen) {
+			formClass = [styles.FormHolder, styles.ShowForm];
+			console.log(formClass.join(' '));
+		}
+
+		let advancedFilterClass = [styles.OptionsHolderAdvanced];
+
+		if (this.state.advancedFilterRequested) {
+			advancedFilterClass = [styles.OptionsHolderAdvanced, styles.Show];
+		}
 		return (
 			<React.Fragment>
 				<MainNavbar />
@@ -71,42 +158,81 @@ class FindADogSection extends Component {
 					<h2>find your perfect puppy</h2>
 					<SectionDivider />
 					<div className={styles.FidDogFiltersHolder}>
-						<div className={styles.FilterBtn}>filters</div>
+						<div className={styles.FilterBtn} onClick={this.openFormHandler}>
+							filters
+						</div>
 					</div>
-					<form className={styles.FormHolder}>
+					<form className={formClass.join(' ')}>
 						<header className={styles.FormHeader}>
 							<FontAwesomeIcon
 								icon={faTimes}
 								className={styles.CloseFilterSectionBtn}
+								onClick={this.closeFormHandler}
 							/>
 							<h2> filters </h2>
-							<button className={styles.ClearSearch}>clear</button>
+							<button
+								className={styles.ClearSearch}
+								onClick={(event) => {
+									event.preventDefault();
+									this.clearFiltersHandler();
+								}}
+							>
+								clear
+							</button>
 						</header>
 						<div className={styles.OptionsSection}>
 							<div className={styles.CategoriesHolder}>
 								<h3>breed for</h3>
 								<div className={styles.OptionsHolder}>{breedForFilters}</div>
 							</div>
-							<th className={styles.FilterDivider}></th>
+
 							<div className={styles.CategoriesHolder}>
 								<h3>temperament</h3>
-								<div className={styles.OptionsHolder}>{temperamentFilter}</div>
+								<div className={styles.OptionsHolder}>
+									{temperamentMainFilters}
+								</div>
+								<div className={styles.AdvanceFiltersBtnHolder}>
+									<button
+										onClick={(event) => {
+											event.preventDefault();
+											this.openandCloseAdvancedSearch();
+										}}
+									>
+										advanced
+									</button>
+								</div>
+								<div className={advancedFilterClass.join(' ')}>
+									{temperamentAdvancedFilter}
+								</div>
 							</div>
-							<th className={styles.FilterDivider}></th>
-							<div className={styles.OptionsHolder}>
-								<h3>origin</h3>
+							<div className={styles.CategoriesHolder}>
+								<h3>Size</h3>
+								<div className={styles.OptionsHolder}>
+									<div key="small">
+										<input type="checkbox" name="breedFor" value="35" />
+										<label>Small</label>
+									</div>
+									<div key="big">
+										<input type="checkbox" name="breedFor" value="36" />
+										<label>Big</label>
+									</div>
+								</div>
 							</div>
-							<th className={styles.FilterDivider}></th>
-							<div className={styles.OptionsHolder}>
-								<h3>size</h3>
-							</div>
-							<th className={styles.FilterDivider}></th>
 							<div className={styles.SearchBtnHolder}>
-								<button className={styles.SearchBtn}>search</button>
+								<button
+									className={styles.SearchBtn}
+									onClick={(event) => {
+										event.preventDefault();
+										this.searchRequestHandler();
+									}}
+								>
+									search
+								</button>
 							</div>
 						</div>
 					</form>
 				</header>
+				<div className={styles.Dogs}>Dog</div>
 				<MainFooter />
 			</React.Fragment>
 		);
