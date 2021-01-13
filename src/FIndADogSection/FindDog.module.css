@@ -21,29 +21,27 @@
 	color: #fff;
 	font-weight: 100;
 	text-align: center;
-	font-size: 1.5rem;
+	font-size: 1.2rem;
 	text-transform: capitalize;
 	outline: none;
 	background: transparent;
 	border: 2px solid #fff;
 	border-radius: 40px;
 	padding: 0.5rem 1rem;
-	width: 200px;
+	width: 120px;
 	margin: 1rem auto;
 	transition: all 0.3s linear;
 }
 
 .FilterBtn:hover {
 	color: rgb(39, 39, 39);
-	font-size: 1.5rem;
 	background: #fff;
 }
 
 .FormHolder {
 	position: absolute;
-	top: 0;
-	display: block;
-	max-width: 1190px;
+	top: 25%;
+	min-width: 100%;
 	padding: 2rem 2rem;
 	margin: 0 auto;
 	background: rgb(228, 228, 228);
@@ -52,13 +50,21 @@
 	transform: translateY(-100%);
 }
 
+@media (min-width: 750px) {
+	.FormHolder {
+		top: 160px;
+		min-width: 95%;
+		left: 2.5%;
+		transform: translateY(-140%);
+	}
+}
+
 .FormHeader {
 	display: flex;
 	width: 100%;
 	align-items: center;
 	justify-content: space-between;
 	border-bottom: 2px solid rgb(194, 194, 194);
-	padding-bottom: 1rem;
 }
 
 .FormHeader h2 {
@@ -70,7 +76,7 @@
 .ClearSearch {
 	font-family: 'Times New Roman', Times, serif;
 	color: rgb(39, 39, 39);
-	font-size: 1.3rem;
+	font-size: 1rem;
 	text-transform: capitalize;
 	outline: none;
 	background: transparent;
@@ -93,26 +99,31 @@
 	color: rgb(155, 155, 155);
 }
 
-.OptionsSection {
-	padding: 1rem 0;
-}
-
 .OptionsHolder {
 	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(200px, 1.5fr));
-	padding: 1rem 0;
+	grid-template-columns: repeat(auto-fill, minmax(130px, 1.5fr));
+	padding: 0.5rem 0;
+	border-radius: 10px;
 }
 
 .OptionsHolderAdvanced {
 	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(360px, 1.5fr));
+	grid-template-columns: repeat(auto-fill, minmax(150px, 1.5fr));
+	border-radius: 10px;
+	border: 1px solid rgb(211, 211, 211);
 	padding: 1rem 0;
 	display: none;
 }
 
+.OptionsSection {
+	overflow: scroll;
+	overflow-x: hidden;
+	height: 400px;
+}
+
 .OptionsSection input {
 	display: inline-block;
-	margin: 1rem;
+	margin: 0.5rem;
 	width: 20px;
 	height: 20px;
 }
@@ -135,12 +146,13 @@
 .AdvanceFiltersBtnHolder {
 	width: 100%;
 	text-align: right;
+	margin: 0.2rem 0;
 }
 
 .AdvanceFiltersBtnHolder button {
 	outline: none;
 	border: none;
-	font-size: 1rem;
+	font-size: 0.9rem;
 	text-transform: capitalize;
 }
 
@@ -174,7 +186,6 @@
 }
 
 .ShowForm {
-	position: relative;
 	opacity: 1;
 	animation: slideUp 0.3s ease-in;
 	transform: none;

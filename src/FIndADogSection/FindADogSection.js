@@ -224,6 +224,7 @@ class FindADogSection extends Component {
 									onClick={(event) => {
 										event.preventDefault();
 										this.searchRequestHandler();
+										this.setState({ advancedFilterRequested: false });
 									}}
 								>
 									search

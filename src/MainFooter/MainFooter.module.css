@@ -132,7 +132,16 @@
 
 @media (min-width: 1100px) {
 	.MainFooter {
-		padding: 2rem 22rem;
+		padding: 2rem 11rem;
+	}
+	.Item {
+		width: 400px;
+	}
+}
+
+@media (min-width: 1400px) {
+	.MainFooter {
+		padding: 2rem 18rem;
 	}
 	.Item {
 		width: 400px;

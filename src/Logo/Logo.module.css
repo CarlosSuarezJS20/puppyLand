@@ -9,6 +9,7 @@
 	display: flex;
 	align-items: center;
 	border-radius: 50px;
+	height: 42px;
 }
 
 .LogoItem {
@@ -17,7 +18,7 @@
 }
 
 .LogoTitle {
-	margin-top: 15px;
+	padding-top: 20px;
 	margin-left: 5px;
 	text-transform: capitalize;
 	color: rgb(204, 204, 204);
