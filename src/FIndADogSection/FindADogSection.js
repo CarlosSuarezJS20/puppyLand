@@ -15,6 +15,7 @@ import {
 	removeDublicates,
 	filterBuilder,
 } from '../HelperFunctions/HelperFunctions';
+import FinderDisplayDogs from './FinderDisplayDogs/FinderDisplayDogs';
 
 class FindADogSection extends Component {
 	state = {
@@ -22,10 +23,6 @@ class FindADogSection extends Component {
 		formIsOpen: false,
 		advancedFilterRequested: false,
 	};
-
-	componentDidMount() {
-		this.props.onFetchDogs();
-	}
 
 	openFormHandler = () => {
 		this.setState({ formIsOpen: true });
@@ -61,7 +58,6 @@ class FindADogSection extends Component {
 		let temperamentAdvancedFilter;
 
 		if (this.props.dogs) {
-			//filters data before allocating it to elements BREED FOR
 			const initialDogsBreedForFilter = this.props.dogs
 				.map((dog) => dog.bred_for)
 				.join(' , ')
@@ -233,7 +229,7 @@ class FindADogSection extends Component {
 						</div>
 					</form>
 				</header>
-				<div className={styles.Dogs}>Dog</div>
+				<FinderDisplayDogs data={this.props.dogs} />
 				<MainFooter />
 			</React.Fragment>
 		);

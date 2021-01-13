@@ -1,0 +1,46 @@
+.PaginationContainer {
+	padding: 1rem 2rem;
+	width: 350px;
+	margin: 0 auto;
+}
+
+.PageListHolder {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem 0;
+	padding-top: 0.5rem;
+	padding-bottom: 1.5rem;
+	margin-right: 3rem;
+}
+
+.PageListHolder a {
+	color: #ffff;
+	background: rgb(197, 47, 47);
+	border: 2px solid rgb(133, 33, 33);
+	border-radius: 5px;
+	padding: 5px;
+}
+
+.PageListHolder a:hover {
+	border: 1px solid rgb(253, 156, 156);
+}
+
+@media (min-width: 700px) {
+	.PaginationContainer {
+		width: 750px;
+	}
+
+	.PageListHolder {
+		gap: 1rem 0.5rem;
+	}
+}
+
+@media (min-width: 1200px) {
+	.PaginationContainer {
+		width: 1090px;
+	}
+
+	.PageListHolder {
+		gap: 1rem 0.5rem;
+	}
+}

@@ -1,0 +1,13 @@
+.SearchDogsDisplayList {
+	background: rgb(39, 39, 39);
+}
+
+.SearchDogsDisplayHolder {
+	display: grid;
+	gap: 2.5rem 2rem;
+	max-width: 1190px;
+	grid-template-columns: repeat(auto-fill, minmax(290px, 1.5fr));
+	margin: 0 auto;
+	background: rgb(39, 39, 39);
+	padding-top: 3rem;
+}
