@@ -6,7 +6,7 @@ import Pagination from '../../UI/Pagination/Pagination';
 class FinderDisplayDogs extends Component {
 	state = {
 		currentPage: 1,
-		dogsPerPage: 10,
+		dogsPerPage: 9,
 	};
 
 	paginateHandler = (pageNumber) => {
@@ -17,8 +17,6 @@ class FinderDisplayDogs extends Component {
 	render() {
 		// get post
 		let currentDogs;
-
-		console.log(this.state.currentPage);
 
 		if (this.props.data) {
 			const indexOfLastDog = this.state.currentPage * this.state.dogsPerPage;

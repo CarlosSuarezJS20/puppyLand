@@ -22,10 +22,25 @@ class FindADogSection extends Component {
 		dogFilter: '',
 		formIsOpen: false,
 		advancedFilterRequested: false,
+		filters: [],
+	};
+
+	componentDidUpdate() {
+		// Handles the Filters state property update:
+		this.updateFiltersHandler();
+	}
+
+	updateFiltersHandler = () => {
+		if (this.filtersForIntialState.length === this.state.filters.length) {
+			return;
+		} else {
+			this.setState({ filters: this.filtersForIntialState });
+		}
 	};
 
 	openFormHandler = () => {
 		this.setState({ formIsOpen: true });
+		console.log(this.state);
 	};
 
 	closeFormHandler = () => {
@@ -51,6 +66,8 @@ class FindADogSection extends Component {
 	searchRequestHandler = () => {
 		this.setState({ formIsOpen: false });
 	};
+
+	onChangeCheckboxHandler = (event) => {};
 
 	render() {
 		let breedForFilters;
@@ -116,21 +133,38 @@ class FindADogSection extends Component {
 				advancedTemperamentFilters
 			);
 
+			// Sets state for Filters CheckBoxes:
+
+			const filterBreedFor = dogsBreedWithoutDuplicates;
+
+			// Converted this into a property to make it available across the entire class and be able to use it in componentDidMount
+			this.filtersForIntialState = filterBreedFor
+				.concat(
+					mainTemperamentsFiltersNoDuplicates,
+					advancedTemperamentFiltersNoDuplicates
+				)
+				.map((filter) => {
+					return { name: filter, isChecked: false };
+				});
+
 			//BUILDS RENDER ELEMENTS
 
 			breedForFilters = filterBuilder(
 				'breedForFilter',
-				dogsBreedWithoutDuplicates
+				dogsBreedWithoutDuplicates,
+				this.onChangeCheckboxHandler
 			);
 
 			temperamentMainFilters = filterBuilder(
 				'temperament',
-				mainTemperamentsFiltersNoDuplicates
+				mainTemperamentsFiltersNoDuplicates,
+				this.onChangeCheckboxHandler
 			);
 
 			temperamentAdvancedFilter = filterBuilder(
 				'temperament',
-				advancedTemperamentFiltersNoDuplicates
+				advancedTemperamentFiltersNoDuplicates,
+				this.onChangeCheckboxHandler
 			);
 		}
 
@@ -139,7 +173,6 @@ class FindADogSection extends Component {
 		let formClass = [styles.FormHolder];
 		if (this.state.formIsOpen) {
 			formClass = [styles.FormHolder, styles.ShowForm];
-			console.log(formClass.join(' '));
 		}
 
 		let advancedFilterClass = [styles.OptionsHolderAdvanced];
@@ -147,6 +180,7 @@ class FindADogSection extends Component {
 		if (this.state.advancedFilterRequested) {
 			advancedFilterClass = [styles.OptionsHolderAdvanced, styles.Show];
 		}
+
 		return (
 			<React.Fragment>
 				<MainNavbar />

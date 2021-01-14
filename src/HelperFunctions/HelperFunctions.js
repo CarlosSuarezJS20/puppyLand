@@ -7,7 +7,7 @@ export const removeDublicates = (array) => {
 	});
 };
 
-export const filterBuilder = (type, filters) => {
+export const filterBuilder = (type, filters, onChangeHandler) => {
 	switch (type) {
 		case 'breedForFilter':
 			return filters.map((each) => {
@@ -18,11 +18,19 @@ export const filterBuilder = (type, filters) => {
 
 				return (
 					<div key={each}>
-						<input type="checkbox" name="breedFor" value={each.slice(0, 4)} />
+						<input
+							type="checkbox"
+							name="breedFor"
+							value={each.slice(0, 4)}
+							onChange={(event) => {
+								onChangeHandler(event);
+							}}
+						/>
 						<label>{each}</label>
 					</div>
 				);
 			});
+
 		case 'temperament':
 			return filters.map((each) => {
 				if (!each) {
@@ -31,7 +39,14 @@ export const filterBuilder = (type, filters) => {
 				}
 				return (
 					<div key={each}>
-						<input type="checkbox" name="temperament" value={each} />
+						<input
+							type="checkbox"
+							name="temperament"
+							value={each}
+							onChange={(event) => {
+								onChangeHandler(event);
+							}}
+						/>
 						<label>{each[0].toUpperCase() + each.substring(1)}</label>
 					</div>
 				);
