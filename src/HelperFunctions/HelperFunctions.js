@@ -1,6 +1,13 @@
 /* eslint-disable default-case */
 import React from 'react';
 
+export const transformHeight = (heightObj) => {
+	const { metric } = heightObj;
+	const metricArray = metric.split('-').map((n) => +n);
+
+	return (metricArray[0] + metricArray[1]) / 2;
+};
+
 export const removeDublicates = (array) => {
 	return array.filter((each, index) => {
 		return array.indexOf(each) === index;
@@ -10,7 +17,7 @@ export const removeDublicates = (array) => {
 export const filterBuilder = (type, filters, onChangeHandler) => {
 	switch (type) {
 		case 'breedForFilter':
-			return filters.map((each) => {
+			return filters.map((each, index) => {
 				if (!each) {
 					// eslint-disable-next-line array-callback-return
 					return;
@@ -22,8 +29,8 @@ export const filterBuilder = (type, filters, onChangeHandler) => {
 							type="checkbox"
 							name="breedFor"
 							value={each.slice(0, 4)}
-							onChange={(event) => {
-								onChangeHandler(event);
+							onChange={(e) => {
+								onChangeHandler(e, each);
 							}}
 						/>
 						<label>{each}</label>
@@ -43,8 +50,8 @@ export const filterBuilder = (type, filters, onChangeHandler) => {
 							type="checkbox"
 							name="temperament"
 							value={each}
-							onChange={(event) => {
-								onChangeHandler(event);
+							onChange={(e) => {
+								onChangeHandler(e, each);
 							}}
 						/>
 						<label>{each[0].toUpperCase() + each.substring(1)}</label>

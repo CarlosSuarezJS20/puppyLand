@@ -14,15 +14,19 @@ import { connect } from 'react-redux';
 import {
 	removeDublicates,
 	filterBuilder,
+	transformHeight,
 } from '../HelperFunctions/HelperFunctions';
 import FinderDisplayDogs from './FinderDisplayDogs/FinderDisplayDogs';
 
 class FindADogSection extends Component {
 	state = {
-		dogFilter: '',
 		formIsOpen: false,
 		advancedFilterRequested: false,
-		filters: [],
+		filters: [
+			{ id: '34', name: '34', isChecked: false },
+			{ id: '36', name: '36', isChecked: false },
+			{ id: '35', name: '35', isChecked: false },
+		],
 	};
 
 	componentDidUpdate() {
@@ -31,16 +35,17 @@ class FindADogSection extends Component {
 	}
 
 	updateFiltersHandler = () => {
-		if (this.filtersForIntialState.length === this.state.filters.length) {
+		if (this.filtersForIntialState.length + 3 === this.state.filters.length) {
 			return;
 		} else {
-			this.setState({ filters: this.filtersForIntialState });
+			const copyState = [...this.state.filters];
+			const newFilters = copyState.concat(this.filtersForIntialState);
+			this.setState({ filters: newFilters });
 		}
 	};
 
 	openFormHandler = () => {
 		this.setState({ formIsOpen: true });
-		console.log(this.state);
 	};
 
 	closeFormHandler = () => {
@@ -67,14 +72,41 @@ class FindADogSection extends Component {
 		this.setState({ formIsOpen: false });
 	};
 
-	onChangeCheckboxHandler = (event) => {};
+	onChangeCheckboxHandler = (event, id) => {
+		const copyOfFilters = this.state.filters;
+		copyOfFilters.forEach((filter) => {
+			if (filter.id === id) {
+				filter.isChecked = event.target.checked;
+			}
+		});
+		this.setState({ filters: copyOfFilters });
+	};
 
 	render() {
+		let dogsData;
 		let breedForFilters;
 		let temperamentMainFilters;
 		let temperamentAdvancedFilter;
 
 		if (this.props.dogs) {
+			dogsData = this.props.dogs.map((dog) => {
+				return {
+					bred_for: dog.bred_for,
+					id: dog.id,
+					image: dog.image,
+					name: dog.name,
+					temperament: dog.temperament,
+					height: transformHeight(dog.height),
+				};
+			});
+
+			const listHeight = dogsData
+				.map((dog) => dog.height)
+				.filter((height) => !isNaN(height))
+				.sort();
+
+			console.log(listHeight[53], listHeight[107]);
+
 			const initialDogsBreedForFilter = this.props.dogs
 				.map((dog) => dog.bred_for)
 				.join(' , ')
@@ -144,7 +176,7 @@ class FindADogSection extends Component {
 					advancedTemperamentFiltersNoDuplicates
 				)
 				.map((filter) => {
-					return { name: filter, isChecked: false };
+					return { id: filter, name: filter, isChecked: false };
 				});
 
 			//BUILDS RENDER ELEMENTS
@@ -239,12 +271,37 @@ class FindADogSection extends Component {
 								<h3>Size</h3>
 								<div className={styles.OptionsHolder}>
 									<div key="small">
-										<input type="checkbox" name="breedFor" value="35" />
+										<input
+											type="checkbox"
+											name="34"
+											value="34"
+											onChange={(e) => {
+												this.onChangeCheckboxHandler(e, '34');
+											}}
+										/>
 										<label>Small</label>
 									</div>
-									<div key="big">
-										<input type="checkbox" name="breedFor" value="36" />
-										<label>Big</label>
+									<div key="Medium">
+										<input
+											type="checkbox"
+											name="35"
+											value="35"
+											onChange={(e) => {
+												this.onChangeCheckboxHandler(e, '35');
+											}}
+										/>
+										<label>Medium</label>
+									</div>
+									<div key="Large">
+										<input
+											type="checkbox"
+											name="36"
+											value="36"
+											onChange={(e) => {
+												this.onChangeCheckboxHandler(e, '36');
+											}}
+										/>
+										<label>Large</label>
 									</div>
 								</div>
 							</div>
@@ -263,7 +320,10 @@ class FindADogSection extends Component {
 						</div>
 					</form>
 				</header>
-				<FinderDisplayDogs data={this.props.dogs} />
+				<FinderDisplayDogs
+					data={this.props.dogs}
+					filters={this.state.filters}
+				/>
 				<MainFooter />
 			</React.Fragment>
 		);
