@@ -7,8 +7,19 @@ import React from 'react';
 const transformHeight = (heightObj) => {
 	const { metric } = heightObj;
 	const metricArray = metric.split('-').map((n) => +n);
+	let size;
+	if (
+		(metricArray[0] + metricArray[1]) / 2 > 39.5 &&
+		(metricArray[0] + metricArray[1]) / 2 < 59
+	) {
+		size = 'medium';
+	} else if ((metricArray[0] + metricArray[1]) / 2 <= 39.5) {
+		size = 'small';
+	} else {
+		size = 'large';
+	}
 
-	return (metricArray[0] + metricArray[1]) / 2;
+	return size;
 };
 
 // reorganises original servers data
@@ -35,7 +46,7 @@ export const dataFromServerModelerUponSearch = (data) => {
 			} else {
 				return {
 					id: dog.id,
-					filters: dog.bred_for
+					characteristics: dog.bred_for
 						.replace(',', ' ')
 						.split(' ')
 						.concat(dog.temperament.replace(',', ' ').split(' '))
@@ -44,12 +55,11 @@ export const dataFromServerModelerUponSearch = (data) => {
 				};
 			}
 		})
-		.filter((dog) => dog && !isNaN(dog.height));
+		.filter((dog) => dog);
 };
 
 // reorganises the intial filters property from state for filtering
 export const filtersDataModeler = (data) => {
-	console.log(data);
 	return data
 		.filter((filter) => filter.isChecked)
 		.map((filter) => {
@@ -95,16 +105,6 @@ export const stringsToArraysTemperaments = (data) => {
 		.filter((word) => word.length > 3)
 		.map((word) => word.replace(',', '').toLowerCase())
 		.sort();
-};
-
-// Data Strings To Array for Heights
-
-export const stringsToArraysHeight = (data) => {
-	return data
-		.map((dog) => dog.height)
-		.filter((height) => !isNaN(height))
-		.sort()
-		.filter((height, index) => index === 53 || index === 107 || index === 108);
 };
 
 // DYNAMICALLY CREATES THE CHECKBOXES
@@ -170,7 +170,11 @@ export const filterBuilder = (type, filters, onChangeHandler) => {
 							}}
 						/>
 						<label>
-							{each === 39.5 ? 'small' : each === 59 ? 'medium' : 'large'}
+							{each === 'small'
+								? 'small'
+								: each === 'medium'
+								? 'medium'
+								: 'large'}
 						</label>
 					</div>
 				);

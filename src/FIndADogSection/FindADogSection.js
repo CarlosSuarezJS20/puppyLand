@@ -19,7 +19,6 @@ import {
 	dataFromServerModelerUponSearch,
 	bredForArray,
 	stringsToArraysTemperaments,
-	stringsToArraysHeight,
 } from '../HelperFunctions/HelperFunctions';
 import FinderDisplayDogs from './FinderDisplayDogs/FinderDisplayDogs';
 
@@ -75,26 +74,6 @@ class FindADogSection extends Component {
 		const filteredDogsRestructuredData = dataFromServerModelerUponSearch(
 			this.props.dogs
 		);
-
-		console.log(filteredDogsRestructuredData);
-		console.log(filters);
-
-		// const results = filteredDogsRestructuredData.fiter(filter => )
-
-		// const filtersResults = filteredDogsRestructuredData.filter((dog) => {
-		// 	for (let feature in dog) {
-		// 		if (!isNaN(dog[feature]) && feature !== 'id') {
-		// 			return;
-		// 		}
-
-		// 		if (Array.isArray(dog[feature])) {
-		// 			console.log(dog[feature]);
-		// 			return filters.includes((filter) => dog[feature].includes(filter));
-		// 		}
-		// 	}
-		// });
-
-		// console.log(filtersResults);
 
 		this.setState({ formIsOpen: false });
 	};
@@ -181,12 +160,6 @@ class FindADogSection extends Component {
 				advancedTemperamentFilters
 			);
 
-			//DOGS HEIGHT FILTERS
-
-			listHeight = stringsToArraysHeight(dogsData);
-
-			//End of Dogs height averages
-
 			// Sets state for Filters CheckBoxes:
 
 			const filterBreedFor = dogsBreedWithoutDuplicates;
@@ -196,7 +169,7 @@ class FindADogSection extends Component {
 				.concat(
 					mainTemperamentsFiltersNoDuplicates,
 					advancedTemperamentFiltersNoDuplicates,
-					listHeight
+					['small', 'medium', 'large']
 				)
 				.map((filter) => {
 					return { name: filter, isChecked: false };
@@ -218,7 +191,7 @@ class FindADogSection extends Component {
 
 			heightFilters = filterBuilder(
 				'height',
-				listHeight,
+				['small', 'medium', 'large'],
 				this.onChangeCheckboxHandler
 			);
 		}
