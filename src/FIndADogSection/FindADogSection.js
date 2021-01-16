@@ -14,19 +14,21 @@ import { connect } from 'react-redux';
 import {
 	removeDublicates,
 	filterBuilder,
-	transformHeight,
+	dataFromServerModeler,
+	filtersDataModeler,
+	dataFromServerModelerUponSearch,
+	bredForArray,
+	stringsToArraysTemperaments,
+	stringsToArraysHeight,
 } from '../HelperFunctions/HelperFunctions';
 import FinderDisplayDogs from './FinderDisplayDogs/FinderDisplayDogs';
 
 class FindADogSection extends Component {
 	state = {
+		filteredDogs: [],
 		formIsOpen: false,
 		advancedFilterRequested: false,
-		filters: [
-			{ id: '34', name: '34', isChecked: false },
-			{ id: '36', name: '36', isChecked: false },
-			{ id: '35', name: '35', isChecked: false },
-		],
+		filters: [],
 	};
 
 	componentDidUpdate() {
@@ -35,7 +37,7 @@ class FindADogSection extends Component {
 	}
 
 	updateFiltersHandler = () => {
-		if (this.filtersForIntialState.length + 3 === this.state.filters.length) {
+		if (this.filtersForIntialState.length === this.state.filters.length) {
 			return;
 		} else {
 			const copyState = [...this.state.filters];
@@ -69,13 +71,50 @@ class FindADogSection extends Component {
 	};
 
 	searchRequestHandler = () => {
+		const filters = filtersDataModeler(this.state.filters);
+		const filteredDogsRestructuredData = dataFromServerModelerUponSearch(
+			this.props.dogs
+		);
+
+		console.log(filteredDogsRestructuredData);
+		console.log(filters);
+
+		// const results = filteredDogsRestructuredData.fiter(filter => )
+
+		// const filtersResults = filteredDogsRestructuredData.filter((dog) => {
+		// 	for (let feature in dog) {
+		// 		if (!isNaN(dog[feature]) && feature !== 'id') {
+		// 			return;
+		// 		}
+
+		// 		if (Array.isArray(dog[feature])) {
+		// 			console.log(dog[feature]);
+		// 			return filters.includes((filter) => dog[feature].includes(filter));
+		// 		}
+		// 	}
+		// });
+
+		// console.log(filtersResults);
+
 		this.setState({ formIsOpen: false });
 	};
 
-	onChangeCheckboxHandler = (event, id) => {
+	onChangeCheckboxHandler = (event) => {
 		const copyOfFilters = this.state.filters;
+
 		copyOfFilters.forEach((filter) => {
-			if (filter.id === id) {
+			let name;
+			if (isNaN(filter.name)) {
+				if (filter.name.endsWith('ing')) {
+					name = filter.name.slice(0, filter.name.length - 3);
+				} else {
+					name = filter.name;
+				}
+			} else {
+				name = filter.name.toString();
+			}
+
+			if (name === event.target.value) {
 				filter.isChecked = event.target.checked;
 			}
 		});
@@ -84,39 +123,18 @@ class FindADogSection extends Component {
 
 	render() {
 		let dogsData;
+		let listHeight;
 		let breedForFilters;
 		let temperamentMainFilters;
 		let temperamentAdvancedFilter;
+		let heightFilters;
 
 		if (this.props.dogs) {
-			dogsData = this.props.dogs.map((dog) => {
-				return {
-					bred_for: dog.bred_for,
-					id: dog.id,
-					image: dog.image,
-					name: dog.name,
-					temperament: dog.temperament,
-					height: transformHeight(dog.height),
-				};
-			});
+			dogsData = dataFromServerModeler(this.props.dogs);
 
-			const listHeight = dogsData
-				.map((dog) => dog.height)
-				.filter((height) => !isNaN(height))
-				.sort();
+			// BREED_FOR FILTERS
 
-			console.log(listHeight[53], listHeight[107]);
-
-			const initialDogsBreedForFilter = this.props.dogs
-				.map((dog) => dog.bred_for)
-				.join(' , ')
-				.split(' ')
-				.filter((word) => {
-					return word.endsWith('ing');
-				})
-				.map((word) => word.toLowerCase())
-				.filter((word) => word !== 'driving')
-				.sort();
+			const initialDogsBreedForFilter = bredForArray(this.props.dogs);
 
 			const dogsBreedWithoutDuplicates = removeDublicates(
 				initialDogsBreedForFilter
@@ -124,15 +142,11 @@ class FindADogSection extends Component {
 
 			// filters data before allocating it to elements TEMPERAMENT
 
-			const initialTemperamentFilter = this.props.dogs
-				.map((dog) => dog.temperament)
-				.join(' , ')
-				.split(' ')
-				.filter((word) => word.length > 3)
-				.map((word) => word.replace(',', '').toLowerCase())
-				.sort();
+			const initialTemperamentFilter = stringsToArraysTemperaments(
+				this.props.dogs
+			);
 
-			// SPLITS MAIN AND ADVANCED FILTERS IN TEMPERAMENT
+			// SPLITS MAIN AND ADVANCED FILTERS IN TEMPERAMENT and Removes irrelevant
 
 			const advancedTemperamentFilters = initialTemperamentFilter.filter(
 				(word) =>
@@ -155,15 +169,23 @@ class FindADogSection extends Component {
 					word === 'gentle'
 			);
 
-			//REMOVES DUPLICATES FROM MAIN LIST
+			//REMOVES DUPLICATES FROM MAIN FILTERS LIST
 
 			const mainTemperamentsFiltersNoDuplicates = removeDublicates(
 				mainTemperamentsFilters
 			);
 
+			//REMOVES DUPLICATES FROM ADVANCED FILTERs LIST
+
 			const advancedTemperamentFiltersNoDuplicates = removeDublicates(
 				advancedTemperamentFilters
 			);
+
+			//DOGS HEIGHT FILTERS
+
+			listHeight = stringsToArraysHeight(dogsData);
+
+			//End of Dogs height averages
 
 			// Sets state for Filters CheckBoxes:
 
@@ -173,13 +195,14 @@ class FindADogSection extends Component {
 			this.filtersForIntialState = filterBreedFor
 				.concat(
 					mainTemperamentsFiltersNoDuplicates,
-					advancedTemperamentFiltersNoDuplicates
+					advancedTemperamentFiltersNoDuplicates,
+					listHeight
 				)
 				.map((filter) => {
-					return { id: filter, name: filter, isChecked: false };
+					return { name: filter, isChecked: false };
 				});
 
-			//BUILDS RENDER ELEMENTS
+			//BUILDS RENDER ELEMENTS FOR FILTERS HELPER FUNCTION
 
 			breedForFilters = filterBuilder(
 				'breedForFilter',
@@ -193,9 +216,9 @@ class FindADogSection extends Component {
 				this.onChangeCheckboxHandler
 			);
 
-			temperamentAdvancedFilter = filterBuilder(
-				'temperament',
-				advancedTemperamentFiltersNoDuplicates,
+			heightFilters = filterBuilder(
+				'height',
+				listHeight,
 				this.onChangeCheckboxHandler
 			);
 		}
@@ -269,41 +292,7 @@ class FindADogSection extends Component {
 							</div>
 							<div className={styles.CategoriesHolder}>
 								<h3>Size</h3>
-								<div className={styles.OptionsHolder}>
-									<div key="small">
-										<input
-											type="checkbox"
-											name="34"
-											value="34"
-											onChange={(e) => {
-												this.onChangeCheckboxHandler(e, '34');
-											}}
-										/>
-										<label>Small</label>
-									</div>
-									<div key="Medium">
-										<input
-											type="checkbox"
-											name="35"
-											value="35"
-											onChange={(e) => {
-												this.onChangeCheckboxHandler(e, '35');
-											}}
-										/>
-										<label>Medium</label>
-									</div>
-									<div key="Large">
-										<input
-											type="checkbox"
-											name="36"
-											value="36"
-											onChange={(e) => {
-												this.onChangeCheckboxHandler(e, '36');
-											}}
-										/>
-										<label>Large</label>
-									</div>
-								</div>
+								<div className={styles.OptionsHolder}>{heightFilters}</div>
 							</div>
 							<div className={styles.SearchBtnHolder}>
 								<button
@@ -320,10 +309,7 @@ class FindADogSection extends Component {
 						</div>
 					</form>
 				</header>
-				<FinderDisplayDogs
-					data={this.props.dogs}
-					filters={this.state.filters}
-				/>
+				<FinderDisplayDogs data={this.props.dogs} />
 				<MainFooter />
 			</React.Fragment>
 		);
