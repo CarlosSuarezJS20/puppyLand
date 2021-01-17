@@ -18,15 +18,19 @@ import {
 	dataFromServerModelerUponSearch,
 	bredForFiltersArray,
 	stringsToArraysTemperaments,
+	checkBoxesStateCreator,
+	manageFiltersChanges,
 } from '../HelperFunctions/HelperFunctions';
+
 import FinderDisplayDogs from './FinderDisplayDogs/FinderDisplayDogs';
 
 class FindADogSection extends Component {
 	state = {
-		filteredDogs: [],
+		results: [],
 		formIsOpen: false,
 		advancedFilterRequested: false,
-		filters: [],
+		checkBoxes: [],
+		filter: { breedFor: [], temperaments: [], size: [] },
 	};
 
 	componentDidUpdate() {
@@ -35,10 +39,10 @@ class FindADogSection extends Component {
 	}
 
 	updateFiltersHandler = () => {
-		if (this.filtersForIntialState.length === this.state.filters.length) {
+		if (this.checkBoxesForIntialState.length === this.state.checkBoxes.length) {
 			return;
 		} else {
-			this.setState({ filters: this.filtersForIntialState });
+			this.setState({ checkBoxes: this.checkBoxesForIntialState });
 		}
 	};
 
@@ -67,43 +71,30 @@ class FindADogSection extends Component {
 	};
 
 	searchRequestHandler = () => {
-		const filters = filtersDataModeler(this.state.filters);
+		const filterCopy = this.state.filter;
 		const dogsCharacteristicsData = dataFromServerModelerUponSearch(
 			this.props.dogs
 		);
 
-		const ret = dogsCharacteristicsData.filter(
-			(dog) =>
-				dog.characteristics.filter((characteristic) =>
-					filters.some((filter) => characteristic.startsWith(filter))
-				).length > 0 && filters.some((filter) => dog.height.includes(filter))
-		);
-
-		console.log(ret);
+		console.log(filterCopy, dogsCharacteristicsData);
 
 		this.setState({ formIsOpen: false });
 	};
 
 	onChangeCheckboxHandler = (event) => {
-		const copyOfFilters = this.state.filters;
+		// Creates the checkboxes for the State
+		const copyOfCheckBoxes = this.state.checkBoxes;
+		checkBoxesStateCreator(copyOfCheckBoxes, event);
 
-		copyOfFilters.forEach((filter) => {
-			let name;
-			if (isNaN(filter.name)) {
-				if (filter.name.endsWith('ing')) {
-					name = filter.name.slice(0, filter.name.length - 3);
-				} else {
-					name = filter.name;
-				}
-			} else {
-				name = filter.name.toString();
-			}
+		// MANAGES THE FILTER FOR THE STATE DEPENDING ON INPUT CHANGES
+		const copyOfFilter = this.state.filter;
+		const { breedFor, temperaments, size } = copyOfFilter;
+		manageFiltersChanges(breedFor, temperaments, size, event);
 
-			if (name === event.target.value) {
-				filter.isChecked = event.target.checked;
-			}
+		this.setState({
+			checkBoxes: copyOfCheckBoxes,
+			filter: { ...copyOfFilter },
 		});
-		this.setState({ filters: copyOfFilters });
 	};
 
 	render() {
@@ -194,7 +185,7 @@ class FindADogSection extends Component {
 			const filterBreedFor = dogsBreedWithoutDuplicates;
 
 			// Converted this into a property to make it available across the entire class and be able to use it in componentDidMount
-			this.filtersForIntialState = filterBreedFor
+			this.checkBoxesForIntialState = filterBreedFor
 				.concat(
 					mainTemperamentsFiltersNoDuplicates,
 					advancedTemperamentFiltersNoDuplicates,

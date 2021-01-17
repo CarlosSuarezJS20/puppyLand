@@ -1,6 +1,7 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable default-case */
 import React from 'react';
+import { ReactReduxContext } from 'react-redux';
 
 // DATA FROM SERVER MANIPULATION FOR FILTERS
 
@@ -102,6 +103,65 @@ export const stringsToArraysTemperaments = (data) => {
 		.sort();
 };
 
+// checkBoxes State property creator function
+
+export const checkBoxesStateCreator = (array, event) => {
+	return array.forEach((filter) => {
+		let name;
+		if (isNaN(filter.name)) {
+			if (filter.name.endsWith('ing')) {
+				name = filter.name.slice(0, filter.name.length - 3);
+			} else {
+				name = filter.name;
+			}
+		} else {
+			name = filter.name.toString();
+		}
+
+		if (name === event.target.value) {
+			filter.isChecked = event.target.checked;
+		}
+	});
+};
+
+// MANAGES THE FILTER FOR THE STATE DEPENDING ON INPUT CHANGES
+
+export const manageFiltersChanges = (breedFor, temp, size, event) => {
+	if (event.target.name === 'breedFor') {
+		if (breedFor.includes(event.target.value)) {
+			// removes it if the checkedbox already exist
+			const featureIndex = breedFor.findIndex(
+				(feature) => feature === event.target.value
+			);
+			breedFor.splice(featureIndex, 1);
+		} else {
+			breedFor.push(event.target.value);
+		}
+	}
+
+	if (event.target.name === 'temperament') {
+		if (temp.includes(event.target.value)) {
+			const featureIndex = temp.findIndex(
+				(feature) => feature === event.target.value
+			);
+			temp.splice(featureIndex, 1);
+		} else {
+			temp.push(event.target.value);
+		}
+	}
+
+	if (event.target.name === 'size') {
+		if (size.includes(event.target.value)) {
+			const featureIndex = size.findIndex(
+				(size) => size === event.target.value
+			);
+			size.splice(featureIndex, 1);
+		} else {
+			size.push(event.target.value);
+		}
+	}
+};
+
 // DYNAMICALLY CREATES THE CHECKBOXES
 export const filterBuilder = (type, filters, onChangeHandler) => {
 	switch (type) {
@@ -158,7 +218,7 @@ export const filterBuilder = (type, filters, onChangeHandler) => {
 					<div key={each}>
 						<input
 							type="checkbox"
-							name="height"
+							name="size"
 							value={each}
 							onChange={(e) => {
 								onChangeHandler(e);
