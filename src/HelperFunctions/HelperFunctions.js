@@ -12,6 +12,7 @@ const transformHeight = (heightObj) => {
 		(metricArray[0] + metricArray[1]) / 2 > 39.5 &&
 		(metricArray[0] + metricArray[1]) / 2 < 59
 	) {
+		// defines the size of the dogs according to averages
 		size = 'medium';
 	} else if ((metricArray[0] + metricArray[1]) / 2 <= 39.5) {
 		size = 'small';
@@ -20,20 +21,6 @@ const transformHeight = (heightObj) => {
 	}
 
 	return size;
-};
-
-// reorganises original servers data
-export const dataFromServerModeler = (data) => {
-	return data.map((dog) => {
-		return {
-			bred_for: dog.bred_for,
-			id: dog.id,
-			image: dog.image,
-			name: dog.name,
-			temperament: dog.temperament,
-			height: transformHeight(dog.height),
-		};
-	});
 };
 
 // reorganise original data upon filtering
@@ -50,7 +37,11 @@ export const dataFromServerModelerUponSearch = (data) => {
 						.replace(',', ' ')
 						.split(' ')
 						.concat(dog.temperament.replace(',', ' ').split(' '))
-						.map((word) => word.toLowerCase()),
+						.map((word) => word.toLowerCase())
+						.filter(
+							(word) =>
+								!(word.length <= 2) && word !== 'and' && word !== 'small'
+						),
 					height: transformHeight(dog.height),
 				};
 			}
@@ -63,7 +54,11 @@ export const filtersDataModeler = (data) => {
 	return data
 		.filter((filter) => filter.isChecked)
 		.map((filter) => {
-			if (isNaN(filter.name)) {
+			if (
+				filter.name !== 'small' &&
+				filter.name !== 'medium' &&
+				filter.name !== 'large'
+			) {
 				return filter.name.slice(0, filter.name.length - 3);
 			} else {
 				return filter.name;
@@ -82,7 +77,7 @@ export const removeDublicates = (array) => {
 };
 
 // Data Strings into Arrays for Bred For
-export const bredForArray = (data) => {
+export const bredForFiltersArray = (data) => {
 	return data
 		.map((dog) => dog.bred_for)
 		.join(' , ')

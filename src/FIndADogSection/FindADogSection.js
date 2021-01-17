@@ -14,10 +14,9 @@ import { connect } from 'react-redux';
 import {
 	removeDublicates,
 	filterBuilder,
-	dataFromServerModeler,
 	filtersDataModeler,
 	dataFromServerModelerUponSearch,
-	bredForArray,
+	bredForFiltersArray,
 	stringsToArraysTemperaments,
 } from '../HelperFunctions/HelperFunctions';
 import FinderDisplayDogs from './FinderDisplayDogs/FinderDisplayDogs';
@@ -39,9 +38,7 @@ class FindADogSection extends Component {
 		if (this.filtersForIntialState.length === this.state.filters.length) {
 			return;
 		} else {
-			const copyState = [...this.state.filters];
-			const newFilters = copyState.concat(this.filtersForIntialState);
-			this.setState({ filters: newFilters });
+			this.setState({ filters: this.filtersForIntialState });
 		}
 	};
 
@@ -71,9 +68,18 @@ class FindADogSection extends Component {
 
 	searchRequestHandler = () => {
 		const filters = filtersDataModeler(this.state.filters);
-		const filteredDogsRestructuredData = dataFromServerModelerUponSearch(
+		const dogsCharacteristicsData = dataFromServerModelerUponSearch(
 			this.props.dogs
 		);
+
+		const ret = dogsCharacteristicsData.filter(
+			(dog) =>
+				dog.characteristics.filter((characteristic) =>
+					filters.some((filter) => characteristic.startsWith(filter))
+				).length > 0 && filters.some((filter) => dog.height.includes(filter))
+		);
+
+		console.log(ret);
 
 		this.setState({ formIsOpen: false });
 	};
@@ -101,19 +107,15 @@ class FindADogSection extends Component {
 	};
 
 	render() {
-		let dogsData;
-		let listHeight;
 		let breedForFilters;
 		let temperamentMainFilters;
 		let temperamentAdvancedFilter;
 		let heightFilters;
 
 		if (this.props.dogs) {
-			dogsData = dataFromServerModeler(this.props.dogs);
-
 			// BREED_FOR FILTERS
 
-			const initialDogsBreedForFilter = bredForArray(this.props.dogs);
+			const initialDogsBreedForFilter = bredForFiltersArray(this.props.dogs);
 
 			const dogsBreedWithoutDuplicates = removeDublicates(
 				initialDogsBreedForFilter
@@ -125,11 +127,12 @@ class FindADogSection extends Component {
 				this.props.dogs
 			);
 
-			// SPLITS MAIN AND ADVANCED FILTERS IN TEMPERAMENT and Removes irrelevant
+			// SPLITS MAIN AND ADVANCED FILTERS IN TEMPERAMENT and Removes irrelevant filters
 
 			const advancedTemperamentFilters = initialTemperamentFilter.filter(
 				(word) =>
 					word !== 'stubborn' &&
+					word !== 'small' &&
 					word !== 'playful' &&
 					word !== 'active' &&
 					word !== 'friendly' &&
@@ -160,6 +163,32 @@ class FindADogSection extends Component {
 				advancedTemperamentFilters
 			);
 
+			//BUILDS RENDER ELEMENTS FOR FILTERS WITH A HELPER FUNCTION
+
+			breedForFilters = filterBuilder(
+				'breedForFilter',
+				dogsBreedWithoutDuplicates,
+				this.onChangeCheckboxHandler
+			);
+
+			temperamentMainFilters = filterBuilder(
+				'temperament',
+				mainTemperamentsFiltersNoDuplicates,
+				this.onChangeCheckboxHandler
+			);
+
+			temperamentAdvancedFilter = filterBuilder(
+				'temperament',
+				advancedTemperamentFiltersNoDuplicates,
+				this.onChangeCheckboxHandler
+			);
+
+			heightFilters = filterBuilder(
+				'height',
+				['small', 'medium', 'large'],
+				this.onChangeCheckboxHandler
+			);
+
 			// Sets state for Filters CheckBoxes:
 
 			const filterBreedFor = dogsBreedWithoutDuplicates;
@@ -174,26 +203,6 @@ class FindADogSection extends Component {
 				.map((filter) => {
 					return { name: filter, isChecked: false };
 				});
-
-			//BUILDS RENDER ELEMENTS FOR FILTERS HELPER FUNCTION
-
-			breedForFilters = filterBuilder(
-				'breedForFilter',
-				dogsBreedWithoutDuplicates,
-				this.onChangeCheckboxHandler
-			);
-
-			temperamentMainFilters = filterBuilder(
-				'temperament',
-				mainTemperamentsFiltersNoDuplicates,
-				this.onChangeCheckboxHandler
-			);
-
-			heightFilters = filterBuilder(
-				'height',
-				['small', 'medium', 'large'],
-				this.onChangeCheckboxHandler
-			);
 		}
 
 		// CLASSES
