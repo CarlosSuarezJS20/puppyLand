@@ -72,11 +72,93 @@ class FindADogSection extends Component {
 
 	searchRequestHandler = () => {
 		const filterCopy = this.state.filter;
+		const copyOfResults = this.state.results;
 		const dogsCharacteristicsData = dataFromServerModelerUponSearch(
 			this.props.dogs
 		);
+		const results = [];
+		let resultsBredFor;
+
+		if (
+			filterCopy.breedFor.length !== 0 &&
+			filterCopy.temperaments.length !== 0 &&
+			filterCopy.size.length !== 0
+		) {
+			console.log('all have something');
+		}
+
+		if (
+			filterCopy.breedFor.length !== 0 &&
+			filterCopy.temperaments.length !== 0 &&
+			filterCopy.size.length === 0
+		) {
+			console.log('breedFor and Temperaments have something');
+		}
+
+		if (
+			filterCopy.breedFor.length !== 0 &&
+			filterCopy.temperaments.length === 0 &&
+			filterCopy.size.length !== 0
+		) {
+			console.log('breedFor and size have something');
+		}
+
+		if (
+			filterCopy.breedFor.length !== 0 &&
+			filterCopy.temperaments.length === 0 &&
+			filterCopy.size.length === 0
+		) {
+			console.log('breedFor have something');
+			resultsBredFor = dogsCharacteristicsData.filter((dog) => {
+				if (filterCopy.breedFor.length !== 0) {
+					return dog.bredFor.some((bredCharacteristic) =>
+						filterCopy.breedFor.includes(bredCharacteristic)
+					);
+				}
+			});
+		}
+
+		if (
+			filterCopy.breedFor.length === 0 &&
+			filterCopy.temperaments.length !== 0 &&
+			filterCopy.size.length !== 0
+		) {
+			console.log('size and Temperaments have something');
+		}
+
+		if (
+			filterCopy.breedFor.length === 0 &&
+			filterCopy.temperaments.length !== 0 &&
+			filterCopy.size.length === 0
+		) {
+			console.log('Temperaments have something');
+		}
+
+		if (
+			filterCopy.breedFor.length === 0 &&
+			filterCopy.temperaments.length === 0 &&
+			filterCopy.size.length !== 0
+		) {
+			console.log('size have something');
+		}
+
+		console.log(results.concat(resultsBredFor));
+
+		// const results = dogsCharacteristicsData.filter((dog) => {
+		// 	if (filterCopy.breedFor.length !== 0) {
+		// 		return dog.bredFor.some((bredCharacteristic) =>
+		// 			filterCopy.breedFor.includes(bredCharacteristic)
+		// 		);
+		// 	}
+		// 	if (filterCopy.temperaments.length !== 0) {
+		// 		return dog.temperaments.some((temperament) =>
+		// 			filterCopy.temperaments.includes(temperament)
+		// 		);
+		// 	}
+		// });
 
 		console.log(filterCopy, dogsCharacteristicsData);
+		// console.log(results);
 
 		this.setState({ formIsOpen: false });
 	};

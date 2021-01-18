@@ -34,16 +34,20 @@ export const dataFromServerModelerUponSearch = (data) => {
 			} else {
 				return {
 					id: dog.id,
-					characteristics: dog.bred_for
+					bredFor: dog.bred_for
 						.replace(',', ' ')
 						.split(' ')
-						.concat(dog.temperament.replace(',', ' ').split(' '))
+						.map((word) => word.toLowerCase())
+						.filter((word) => !(word.length < 2) && word.endsWith('ing')),
+					temperaments: dog.temperament
+						.replace(',', ' ')
+						.split(' ')
 						.map((word) => word.toLowerCase())
 						.filter(
 							(word) =>
 								!(word.length <= 2) && word !== 'and' && word !== 'small'
 						),
-					height: transformHeight(dog.height),
+					size: transformHeight(dog.height),
 				};
 			}
 		})
@@ -177,7 +181,7 @@ export const filterBuilder = (type, filters, onChangeHandler) => {
 						<input
 							type="checkbox"
 							name="breedFor"
-							value={each.slice(0, each.length - 3)}
+							value={each}
 							onChange={(e) => {
 								onChangeHandler(e);
 							}}
