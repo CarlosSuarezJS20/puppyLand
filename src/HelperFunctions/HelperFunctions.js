@@ -166,6 +166,130 @@ export const manageFiltersChanges = (breedFor, temp, size, event) => {
 	}
 };
 
+// FILTER FUNCTION:
+
+export const filterDataResults = (filters, dogsCharacteristicsData) => {
+	let results;
+
+	if (
+		filters.breedFor.length !== 0 &&
+		filters.temperaments.length !== 0 &&
+		filters.size.length !== 0
+	) {
+		const resultsBredFor = dogsCharacteristicsData.filter((dog) => {
+			return dog.bredFor.some((bredCharacteristic) =>
+				filters.breedFor.includes(bredCharacteristic)
+			);
+		});
+
+		const resultsTemperament = dogsCharacteristicsData.filter((dog) => {
+			return dog.temperaments.some((bredCharacteristic) =>
+				filters.temperaments.includes(bredCharacteristic)
+			);
+		});
+
+		results = [...resultsBredFor, ...resultsTemperament].filter((dog) =>
+			filters.size.includes(dog.size)
+		);
+	}
+
+	if (
+		filters.breedFor.length !== 0 &&
+		filters.temperaments.length !== 0 &&
+		filters.size.length === 0
+	) {
+		const resultsBredFor = dogsCharacteristicsData.filter((dog) => {
+			return dog.bredFor.some((bredCharacteristic) =>
+				filters.breedFor.includes(bredCharacteristic)
+			);
+		});
+
+		const resultsTemperament = dogsCharacteristicsData.filter((dog) => {
+			return dog.temperaments.some((bredCharacteristic) =>
+				filters.temperaments.includes(bredCharacteristic)
+			);
+		});
+
+		results = [...resultsBredFor, ...resultsTemperament];
+	}
+
+	if (
+		filters.breedFor.length !== 0 &&
+		filters.temperaments.length === 0 &&
+		filters.size.length !== 0
+	) {
+		const resultsBredFor = dogsCharacteristicsData.filter((dog) => {
+			return dog.bredFor.some((bredCharacteristic) =>
+				filters.breedFor.includes(bredCharacteristic)
+			);
+		});
+
+		results = [...resultsBredFor].filter((dog) =>
+			filters.size.includes(dog.size)
+		);
+	}
+
+	if (
+		filters.breedFor.length !== 0 &&
+		filters.temperaments.length === 0 &&
+		filters.size.length === 0
+	) {
+		const resultsBredFor = dogsCharacteristicsData.filter((dog) => {
+			return dog.bredFor.some((bredCharacteristic) =>
+				filters.breedFor.includes(bredCharacteristic)
+			);
+		});
+
+		results = [...resultsBredFor];
+	}
+
+	if (
+		filters.breedFor.length === 0 &&
+		filters.temperaments.length !== 0 &&
+		filters.size.length !== 0
+	) {
+		const resultsTemperament = dogsCharacteristicsData.filter((dog) => {
+			return dog.temperaments.some((bredCharacteristic) =>
+				filters.temperaments.includes(bredCharacteristic)
+			);
+		});
+
+		results = [...resultsTemperament].filter((dog) =>
+			filters.size.includes(dog.size)
+		);
+	}
+
+	if (
+		filters.breedFor.length === 0 &&
+		filters.temperaments.length !== 0 &&
+		filters.size.length === 0
+	) {
+		const resultsTemperament = dogsCharacteristicsData.filter((dog) => {
+			return dog.temperaments.some((bredCharacteristic) =>
+				filters.temperaments.includes(bredCharacteristic)
+			);
+		});
+
+		results = [...resultsTemperament];
+	}
+
+	if (
+		filters.breedFor.length === 0 &&
+		filters.temperaments.length === 0 &&
+		filters.size.length !== 0
+	) {
+		console.log('size have something');
+		console.log(filters.size);
+		const resultsSize = dogsCharacteristicsData.filter((dog) =>
+			filters.size.includes(dog.size)
+		);
+
+		results = [...resultsSize];
+	}
+
+	return results;
+};
+
 // DYNAMICALLY CREATES THE CHECKBOXES
 export const filterBuilder = (type, filters, onChangeHandler) => {
 	switch (type) {

@@ -20,6 +20,7 @@ import {
 	stringsToArraysTemperaments,
 	checkBoxesStateCreator,
 	manageFiltersChanges,
+	filterDataResults,
 } from '../HelperFunctions/HelperFunctions';
 
 import FinderDisplayDogs from './FinderDisplayDogs/FinderDisplayDogs';
@@ -76,89 +77,9 @@ class FindADogSection extends Component {
 		const dogsCharacteristicsData = dataFromServerModelerUponSearch(
 			this.props.dogs
 		);
-		const results = [];
-		let resultsBredFor;
 
-		if (
-			filterCopy.breedFor.length !== 0 &&
-			filterCopy.temperaments.length !== 0 &&
-			filterCopy.size.length !== 0
-		) {
-			console.log('all have something');
-		}
-
-		if (
-			filterCopy.breedFor.length !== 0 &&
-			filterCopy.temperaments.length !== 0 &&
-			filterCopy.size.length === 0
-		) {
-			console.log('breedFor and Temperaments have something');
-		}
-
-		if (
-			filterCopy.breedFor.length !== 0 &&
-			filterCopy.temperaments.length === 0 &&
-			filterCopy.size.length !== 0
-		) {
-			console.log('breedFor and size have something');
-		}
-
-		if (
-			filterCopy.breedFor.length !== 0 &&
-			filterCopy.temperaments.length === 0 &&
-			filterCopy.size.length === 0
-		) {
-			console.log('breedFor have something');
-			resultsBredFor = dogsCharacteristicsData.filter((dog) => {
-				if (filterCopy.breedFor.length !== 0) {
-					return dog.bredFor.some((bredCharacteristic) =>
-						filterCopy.breedFor.includes(bredCharacteristic)
-					);
-				}
-			});
-		}
-
-		if (
-			filterCopy.breedFor.length === 0 &&
-			filterCopy.temperaments.length !== 0 &&
-			filterCopy.size.length !== 0
-		) {
-			console.log('size and Temperaments have something');
-		}
-
-		if (
-			filterCopy.breedFor.length === 0 &&
-			filterCopy.temperaments.length !== 0 &&
-			filterCopy.size.length === 0
-		) {
-			console.log('Temperaments have something');
-		}
-
-		if (
-			filterCopy.breedFor.length === 0 &&
-			filterCopy.temperaments.length === 0 &&
-			filterCopy.size.length !== 0
-		) {
-			console.log('size have something');
-		}
-
-		console.log(results.concat(resultsBredFor));
-
-		// const results = dogsCharacteristicsData.filter((dog) => {
-		// 	if (filterCopy.breedFor.length !== 0) {
-		// 		return dog.bredFor.some((bredCharacteristic) =>
-		// 			filterCopy.breedFor.includes(bredCharacteristic)
-		// 		);
-		// 	}
-		// 	if (filterCopy.temperaments.length !== 0) {
-		// 		return dog.temperaments.some((temperament) =>
-		// 			filterCopy.temperaments.includes(temperament)
-		// 		);
-		// 	}
-		// });
-
-		console.log(filterCopy, dogsCharacteristicsData);
-		// console.log(results);
+		const filters = filterDataResults(filterCopy, dogsCharacteristicsData);
+		console.log(filters);
 
 		this.setState({ formIsOpen: false });
 	};
@@ -385,3 +306,188 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FindADogSection);
+
+// const data = [
+// 	{
+// 		id: 1,
+// 		bredFor: ['hunting'],
+// 		temperaments: [
+// 			'stubborn',
+// 			'curious,',
+// 			'playful,',
+// 			'adventurous,',
+// 			'active,',
+// 			'fun-loving',
+// 		],
+// 		size: 'small',
+// 	},
+// 	{
+// 		id: 2,
+// 		bredFor: ['coursing', 'hunting'],
+// 		temperaments: ['aloof', 'clownish,', 'dignified,', 'independent,', 'happy'],
+// 		size: 'large',
+// 	},
+// 	{
+// 		id: 3,
+// 		bredFor: [],
+// 		temperaments: ['wild', 'hardworking,', 'dutiful'],
+// 		size: 'large',
+// 	},
+// 	{
+// 		id: 4,
+// 		bredFor: ['hunting'],
+// 		temperaments: [
+// 			'outgoing',
+// 			'friendly,',
+// 			'alert,',
+// 			'confident,',
+// 			'intelligent,',
+// 			'courageous',
+// 		],
+// 		size: 'medium',
+// 	},
+// 	{
+// 		id: 5,
+// 		bredFor: ['guarding'],
+// 		temperaments: ['loyal', 'independent,', 'intelligent,', 'brave'],
+// 		size: 'large',
+// 	},
+// 	{
+// 		id: 6,
+// 		bredFor: ['hunting'],
+// 		temperaments: [
+// 			'docile',
+// 			'alert,',
+// 			'responsive,',
+// 			'dignified,',
+// 			'composed,',
+// 			'friendly,',
+// 			'receptive,',
+// 			'faithful,',
+// 			'courageous',
+// 		],
+// 		size: 'large',
+// 	},
+// 	{
+// 		id: 7,
+// 		bredFor: ['guarding'],
+// 		temperaments: [
+// 			'loving',
+// 			'protective,',
+// 			'trainable,',
+// 			'dutiful,',
+// 			'responsible',
+// 		],
+// 		size: 'medium',
+// 	},
+// 	{
+// 		id: 8,
+// 		bredFor: ['hauling', 'pulling'],
+// 		temperaments: [
+// 			'friendly',
+// 			'affectionate,',
+// 			'devoted,',
+// 			'loyal,',
+// 			'dignified,',
+// 			'playful',
+// 		],
+// 		size: 'large',
+// 	},
+// 	{
+// 		id: 9,
+// 		bredFor: [],
+// 		temperaments: [
+// 			'friendly',
+// 			'affectionate,',
+// 			'devoted,',
+// 			'loyal,',
+// 			'dignified,',
+// 			'playful',
+// 		],
+// 		size: 'large',
+// 	},
+// 	{
+// 		id: 11,
+// 		bredFor: [],
+// 		temperaments: [
+// 			'strong',
+// 			'willed',
+// 			'stubborn,',
+// 			'friendly,',
+// 			'clownish,',
+// 			'affectionate,',
+// 			'loyal,',
+// 			'obedient,',
+// 			'intelligent,',
+// 			'courageous',
+// 		],
+// 		size: 'small',
+// 	},
+// 	{
+// 		id: 12,
+// 		bredFor: [],
+// 		temperaments: [
+// 			'friendly',
+// 			'alert,',
+// 			'reserved,',
+// 			'intelligent,',
+// 			'protective',
+// 		],
+// 		size: 'medium',
+// 	},
+// 	{
+// 		id: 13,
+// 		bredFor: [],
+// 		temperaments: [
+// 			'friendly',
+// 			'alert,',
+// 			'reserved,',
+// 			'intelligent,',
+// 			'protective',
+// 		],
+// 		size: 'small',
+// 	},
+// 	{
+// 		id: 14,
+// 		bredFor: ['hunting'],
+// 		temperaments: [
+// 			'kind',
+// 			'sweet-tempered,',
+// 			'loyal,',
+// 			'independent,',
+// 			'intelligent,',
+// 			'loving',
+// 		],
+// 		size: 'large',
+// 	},
+// 	{
+// 		id: 15,
+// 		bredFor: ['fighting'],
+// 		temperaments: [
+// 			'strong',
+// 			'willed',
+// 			'stubborn,',
+// 			'friendly,',
+// 			'clownish,',
+// 			'affectionate,',
+// 			'loyal,',
+// 			'obedient,',
+// 			'intelligent,',
+// 			'courageous',
+// 		],
+// 		size: 'medium',
+// 	},
+// 	{
+// 		id: 17,
+// 		bredFor: ['flushing', 'retrieving'],
+// 		temperaments: [
+// 			'friendly',
+// 			'energetic,',
+// 			'obedient,',
+// 			'intelligent,',
+// 			'protective,',
+// 			'trainable',
+// 		],
+// 		size: 'medium',
+// 	},
+// ];
