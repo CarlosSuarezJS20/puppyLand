@@ -1,7 +1,6 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable default-case */
 import React from 'react';
-import { ReactReduxContext } from 'react-redux';
 
 // DATA FROM SERVER MANIPULATION FOR FILTERS
 
@@ -169,7 +168,7 @@ export const manageFiltersChanges = (breedFor, temp, size, event) => {
 // FILTER FUNCTION:
 
 export const filterDataResults = (filters, dogsCharacteristicsData) => {
-	let results;
+	let results = [];
 
 	if (
 		filters.breedFor.length !== 0 &&
@@ -278,16 +277,12 @@ export const filterDataResults = (filters, dogsCharacteristicsData) => {
 		filters.temperaments.length === 0 &&
 		filters.size.length !== 0
 	) {
-		console.log('size have something');
-		console.log(filters.size);
 		const resultsSize = dogsCharacteristicsData.filter((dog) =>
 			filters.size.includes(dog.size)
 		);
-
 		results = [...resultsSize];
 	}
-
-	return results;
+	return results.map((dog) => dog.id);
 };
 
 // DYNAMICALLY CREATES THE CHECKBOXES

@@ -57,7 +57,7 @@ const Pagination = ({ totalDogs, dogsPerPage, paginate }) => {
 								toggleHiddenList(e);
 							}}
 						>
-							...
+							{pageNumbers.length > 9 && '...'}
 						</a>
 					</li>
 					{pageNumbers.map((num) => {

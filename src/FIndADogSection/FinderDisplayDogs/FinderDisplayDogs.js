@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import SingleDogCard from '../SingleDogCard/SingleDogCard';
 import styles from './FinderDisplayDogs.module.css';
 import Pagination from '../../UI/Pagination/Pagination';
-import { filtersDataModeler } from '../../HelperFunctions/HelperFunctions';
 
 class FinderDisplayDogs extends Component {
 	state = {

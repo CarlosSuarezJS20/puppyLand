@@ -68,20 +68,29 @@ class FindADogSection extends Component {
 	};
 
 	clearFiltersHandler = () => {
-		console.log('click');
+		// copyOfCheckBoxes.map((checkBox) => checkBox.isChecked);
+		// console.log(copyOfCheckBoxes);
+
+		// for (let checkBox of copyOfCheckBoxes) {
+		// 	checkBox.isChecked = false;
+		// }
+		// console.log(copyOfCheckBoxes);
+
+		this.setState();
 	};
 
 	searchRequestHandler = () => {
 		const filterCopy = this.state.filter;
-		const copyOfResults = this.state.results;
 		const dogsCharacteristicsData = dataFromServerModelerUponSearch(
 			this.props.dogs
 		);
 
-		const filters = filterDataResults(filterCopy, dogsCharacteristicsData);
-		console.log(filters);
+		const resultsFromFilter = filterDataResults(
+			filterCopy,
+			dogsCharacteristicsData
+		);
 
-		this.setState({ formIsOpen: false });
+		this.setState({ formIsOpen: false, results: [...resultsFromFilter] });
 	};
 
 	onChangeCheckboxHandler = (event) => {
@@ -105,6 +114,9 @@ class FindADogSection extends Component {
 		let temperamentMainFilters;
 		let temperamentAdvancedFilter;
 		let heightFilters;
+		let filteredData;
+
+		console.log(this.state.checkBoxes);
 
 		if (this.props.dogs) {
 			// BREED_FOR FILTERS
@@ -199,6 +211,13 @@ class FindADogSection extends Component {
 				});
 		}
 
+		// Update Data for Displaying Dogs
+		if (this.state.results.length > 0) {
+			filteredData = this.props.dogs.filter((dog) => {
+				return this.state.results.includes(dog.id);
+			});
+		}
+
 		// CLASSES
 
 		let formClass = [styles.FormHolder];
@@ -285,7 +304,9 @@ class FindADogSection extends Component {
 						</div>
 					</form>
 				</header>
-				<FinderDisplayDogs data={this.props.dogs} />
+				<FinderDisplayDogs
+					data={filteredData ? filteredData : this.props.dogs}
+				/>
 				<MainFooter />
 			</React.Fragment>
 		);
@@ -306,188 +327,3 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FindADogSection);
-
-// const data = [
-// 	{
-// 		id: 1,
-// 		bredFor: ['hunting'],
-// 		temperaments: [
-// 			'stubborn',
-// 			'curious,',
-// 			'playful,',
-// 			'adventurous,',
-// 			'active,',
-// 			'fun-loving',
-// 		],
-// 		size: 'small',
-// 	},
-// 	{
-// 		id: 2,
-// 		bredFor: ['coursing', 'hunting'],
-// 		temperaments: ['aloof', 'clownish,', 'dignified,', 'independent,', 'happy'],
-// 		size: 'large',
-// 	},
-// 	{
-// 		id: 3,
-// 		bredFor: [],
-// 		temperaments: ['wild', 'hardworking,', 'dutiful'],
-// 		size: 'large',
-// 	},
-// 	{
-// 		id: 4,
-// 		bredFor: ['hunting'],
-// 		temperaments: [
-// 			'outgoing',
-// 			'friendly,',
-// 			'alert,',
-// 			'confident,',
-// 			'intelligent,',
-// 			'courageous',
-// 		],
-// 		size: 'medium',
-// 	},
-// 	{
-// 		id: 5,
-// 		bredFor: ['guarding'],
-// 		temperaments: ['loyal', 'independent,', 'intelligent,', 'brave'],
-// 		size: 'large',
-// 	},
-// 	{
-// 		id: 6,
-// 		bredFor: ['hunting'],
-// 		temperaments: [
-// 			'docile',
-// 			'alert,',
-// 			'responsive,',
-// 			'dignified,',
-// 			'composed,',
-// 			'friendly,',
-// 			'receptive,',
-// 			'faithful,',
-// 			'courageous',
-// 		],
-// 		size: 'large',
-// 	},
-// 	{
-// 		id: 7,
-// 		bredFor: ['guarding'],
-// 		temperaments: [
-// 			'loving',
-// 			'protective,',
-// 			'trainable,',
-// 			'dutiful,',
-// 			'responsible',
-// 		],
-// 		size: 'medium',
-// 	},
-// 	{
-// 		id: 8,
-// 		bredFor: ['hauling', 'pulling'],
-// 		temperaments: [
-// 			'friendly',
-// 			'affectionate,',
-// 			'devoted,',
-// 			'loyal,',
-// 			'dignified,',
-// 			'playful',
-// 		],
-// 		size: 'large',
-// 	},
-// 	{
-// 		id: 9,
-// 		bredFor: [],
-// 		temperaments: [
-// 			'friendly',
-// 			'affectionate,',
-// 			'devoted,',
-// 			'loyal,',
-// 			'dignified,',
-// 			'playful',
-// 		],
-// 		size: 'large',
-// 	},
-// 	{
-// 		id: 11,
-// 		bredFor: [],
-// 		temperaments: [
-// 			'strong',
-// 			'willed',
-// 			'stubborn,',
-// 			'friendly,',
-// 			'clownish,',
-// 			'affectionate,',
-// 			'loyal,',
-// 			'obedient,',
-// 			'intelligent,',
-// 			'courageous',
-// 		],
-// 		size: 'small',
-// 	},
-// 	{
-// 		id: 12,
-// 		bredFor: [],
-// 		temperaments: [
-// 			'friendly',
-// 			'alert,',
-// 			'reserved,',
-// 			'intelligent,',
-// 			'protective',
-// 		],
-// 		size: 'medium',
-// 	},
-// 	{
-// 		id: 13,
-// 		bredFor: [],
-// 		temperaments: [
-// 			'friendly',
-// 			'alert,',
-// 			'reserved,',
-// 			'intelligent,',
-// 			'protective',
-// 		],
-// 		size: 'small',
-// 	},
-// 	{
-// 		id: 14,
-// 		bredFor: ['hunting'],
-// 		temperaments: [
-// 			'kind',
-// 			'sweet-tempered,',
-// 			'loyal,',
-// 			'independent,',
-// 			'intelligent,',
-// 			'loving',
-// 		],
-// 		size: 'large',
-// 	},
-// 	{
-// 		id: 15,
-// 		bredFor: ['fighting'],
-// 		temperaments: [
-// 			'strong',
-// 			'willed',
-// 			'stubborn,',
-// 			'friendly,',
-// 			'clownish,',
-// 			'affectionate,',
-// 			'loyal,',
-// 			'obedient,',
-// 			'intelligent,',
-// 			'courageous',
-// 		],
-// 		size: 'medium',
-// 	},
-// 	{
-// 		id: 17,
-// 		bredFor: ['flushing', 'retrieving'],
-// 		temperaments: [
-// 			'friendly',
-// 			'energetic,',
-// 			'obedient,',
-// 			'intelligent,',
-// 			'protective,',
-// 			'trainable',
-// 		],
-// 		size: 'medium',
-// 	},
-// ];
