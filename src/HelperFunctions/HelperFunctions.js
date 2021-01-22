@@ -34,14 +34,14 @@ export const dataFromServerModelerUponSearch = (data) => {
 				return {
 					id: dog.id,
 					bredFor: dog.bred_for
-						.replace(',', ' ')
+						.replace(',', '')
 						.split(' ')
-						.map((word) => word.toLowerCase())
+						.map((word) => word.replace(',', '').toLowerCase())
 						.filter((word) => !(word.length < 2) && word.endsWith('ing')),
 					temperaments: dog.temperament
-						.replace(',', ' ')
+						.replace(',', '')
 						.split(' ')
-						.map((word) => word.toLowerCase())
+						.map((word) => word.replace(',', '').toLowerCase())
 						.filter(
 							(word) =>
 								!(word.length <= 2) && word !== 'and' && word !== 'small'
@@ -51,23 +51,6 @@ export const dataFromServerModelerUponSearch = (data) => {
 			}
 		})
 		.filter((dog) => dog);
-};
-
-// reorganises the intial filters property from state for filtering
-export const filtersDataModeler = (data) => {
-	return data
-		.filter((filter) => filter.isChecked)
-		.map((filter) => {
-			if (
-				filter.name !== 'small' &&
-				filter.name !== 'medium' &&
-				filter.name !== 'large'
-			) {
-				return filter.name.slice(0, filter.name.length - 3);
-			} else {
-				return filter.name;
-			}
-		});
 };
 
 // Data re-structuring
@@ -108,20 +91,9 @@ export const stringsToArraysTemperaments = (data) => {
 
 // checkBoxes State property creator function
 
-export const checkBoxesStateCreator = (array, event) => {
+export const checkBoxesValueHandler = (array, event) => {
 	return array.forEach((filter) => {
-		let name;
-		if (isNaN(filter.name)) {
-			if (filter.name.endsWith('ing')) {
-				name = filter.name.slice(0, filter.name.length - 3);
-			} else {
-				name = filter.name;
-			}
-		} else {
-			name = filter.name.toString();
-		}
-
-		if (name === event.target.value) {
+		if (filter.name === event.target.value) {
 			filter.isChecked = event.target.checked;
 		}
 	});
@@ -129,16 +101,16 @@ export const checkBoxesStateCreator = (array, event) => {
 
 // MANAGES THE FILTER FOR THE STATE DEPENDING ON INPUT CHANGES
 
-export const manageFiltersChanges = (breedFor, temp, size, event) => {
+export const manageFiltersChanges = (bredFor, temp, size, event) => {
 	if (event.target.name === 'breedFor') {
-		if (breedFor.includes(event.target.value)) {
+		if (bredFor.includes(event.target.value)) {
 			// removes it if the checkedbox already exist
-			const featureIndex = breedFor.findIndex(
+			const featureIndex = bredFor.findIndex(
 				(feature) => feature === event.target.value
 			);
-			breedFor.splice(featureIndex, 1);
+			bredFor.splice(featureIndex, 1);
 		} else {
-			breedFor.push(event.target.value);
+			bredFor.push(event.target.value);
 		}
 	}
 
@@ -165,7 +137,15 @@ export const manageFiltersChanges = (breedFor, temp, size, event) => {
 	}
 };
 
+//REMOVES ALL FILTERS FROM THE FILTER PROPERTY IN THE STATE:
+
 // FILTER FUNCTION:
+
+export const clearAllFilters = (breedFor, temperaments, size) => {
+	breedFor.splice(0, breedFor.length);
+	temperaments.splice(0, temperaments.length);
+	size.splice(0, size.length);
+};
 
 export const filterDataResults = (filters, dogsCharacteristicsData) => {
 	let results = [];
@@ -282,7 +262,15 @@ export const filterDataResults = (filters, dogsCharacteristicsData) => {
 		);
 		results = [...resultsSize];
 	}
-	return results.map((dog) => dog.id);
+
+	return results.map((result) => result.id);
+};
+
+// CLEARS TICKS FROM UI
+export const updatesUiCheckedBox = (checkBox) => {
+	const checkBoxInputId = checkBox.name;
+	const checkBoxElement = document.getElementById(checkBoxInputId);
+	checkBoxElement.checked = false;
 };
 
 // DYNAMICALLY CREATES THE CHECKBOXES
@@ -298,6 +286,7 @@ export const filterBuilder = (type, filters, onChangeHandler) => {
 				return (
 					<div key={each}>
 						<input
+							id={each}
 							type="checkbox"
 							name="breedFor"
 							value={each}
@@ -319,6 +308,7 @@ export const filterBuilder = (type, filters, onChangeHandler) => {
 				return (
 					<div key={each}>
 						<input
+							id={each}
 							type="checkbox"
 							name="temperament"
 							value={each}
@@ -340,6 +330,7 @@ export const filterBuilder = (type, filters, onChangeHandler) => {
 				return (
 					<div key={each}>
 						<input
+							id={each}
 							type="checkbox"
 							name="size"
 							value={each}

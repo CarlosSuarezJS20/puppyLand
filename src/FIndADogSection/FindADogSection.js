@@ -14,13 +14,14 @@ import { connect } from 'react-redux';
 import {
 	removeDublicates,
 	filterBuilder,
-	filtersDataModeler,
 	dataFromServerModelerUponSearch,
 	bredForFiltersArray,
 	stringsToArraysTemperaments,
-	checkBoxesStateCreator,
+	checkBoxesValueHandler,
 	manageFiltersChanges,
 	filterDataResults,
+	updatesUiCheckedBox,
+	clearAllFilters,
 } from '../HelperFunctions/HelperFunctions';
 
 import FinderDisplayDogs from './FinderDisplayDogs/FinderDisplayDogs';
@@ -68,22 +69,33 @@ class FindADogSection extends Component {
 	};
 
 	clearFiltersHandler = () => {
-		// copyOfCheckBoxes.map((checkBox) => checkBox.isChecked);
-		// console.log(copyOfCheckBoxes);
+		const checkBoxesList = this.state.checkBoxes;
+		const copyOfFilter = this.state.filter;
+		const { breedFor, temperaments, size } = copyOfFilter;
+		clearAllFilters(breedFor, temperaments, size);
 
-		// for (let checkBox of copyOfCheckBoxes) {
-		// 	checkBox.isChecked = false;
-		// }
-		// console.log(copyOfCheckBoxes);
+		for (let checkBox of checkBoxesList) {
+			if (checkBox.isChecked) {
+				updatesUiCheckedBox(checkBox); //Updates the UI and removes ticks from checkboxes
+				checkBox.isChecked = false;
+			}
+		}
 
-		this.setState();
+		console.log(copyOfFilter);
+
+		this.setState({ checkBoxes: checkBoxesList });
 	};
 
 	searchRequestHandler = () => {
 		const filterCopy = this.state.filter;
+		console.log(filterCopy);
+
+		// REMODELS SERVERS DATA FOR FILTERING PURPOSES
 		const dogsCharacteristicsData = dataFromServerModelerUponSearch(
 			this.props.dogs
 		);
+
+		console.log(dogsCharacteristicsData);
 
 		const resultsFromFilter = filterDataResults(
 			filterCopy,
@@ -94,9 +106,9 @@ class FindADogSection extends Component {
 	};
 
 	onChangeCheckboxHandler = (event) => {
-		// Creates the checkboxes for the State
+		// HANDLES THE CHECK BOXES TRUE OR FALSE
 		const copyOfCheckBoxes = this.state.checkBoxes;
-		checkBoxesStateCreator(copyOfCheckBoxes, event);
+		checkBoxesValueHandler(copyOfCheckBoxes, event);
 
 		// MANAGES THE FILTER FOR THE STATE DEPENDING ON INPUT CHANGES
 		const copyOfFilter = this.state.filter;
@@ -116,10 +128,9 @@ class FindADogSection extends Component {
 		let heightFilters;
 		let filteredData;
 
-		console.log(this.state.checkBoxes);
-
 		if (this.props.dogs) {
 			// BREED_FOR FILTERS
+			this.props.dogs.filter((dog) => dog);
 
 			const initialDogsBreedForFilter = bredForFiltersArray(this.props.dogs);
 
@@ -213,9 +224,11 @@ class FindADogSection extends Component {
 
 		// Update Data for Displaying Dogs
 		if (this.state.results.length > 0) {
+			console.log(this.state.results);
 			filteredData = this.props.dogs.filter((dog) => {
 				return this.state.results.includes(dog.id);
 			});
+			console.log(filteredData);
 		}
 
 		// CLASSES
