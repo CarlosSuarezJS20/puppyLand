@@ -2,9 +2,13 @@
 import React, { useState } from 'react';
 import styles from './Pagination.module.css';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
+
 const Pagination = ({ totalDogs, dogsPerPage, paginate }) => {
 	const [selected, setSelected] = useState('');
-	const [activateHiddenList, setactivateHiddenList] = useState(false);
+	const [activateHiddenList, setActivateHiddenList] = useState(false);
+	const [morePagesRequest, setMorePagesResquest] = useState(false);
 
 	const pageNumbers = [];
 
@@ -18,10 +22,14 @@ const Pagination = ({ totalDogs, dogsPerPage, paginate }) => {
 
 	const toggleHiddenList = (e) => {
 		e.preventDefault();
-		if (activateHiddenList) {
-			setactivateHiddenList(false);
+		if (morePagesRequest && activateHiddenList) {
+			console.log('here');
+			setActivateHiddenList(false);
+			setMorePagesResquest(false);
+			console.log(activateHiddenList, morePagesRequest);
 		} else {
-			setactivateHiddenList(true);
+			setActivateHiddenList(true);
+			setMorePagesResquest(true);
 		}
 	};
 
@@ -49,17 +57,22 @@ const Pagination = ({ totalDogs, dogsPerPage, paginate }) => {
 							);
 						}
 					})}
-					<li>
-						<a
-							href="!#"
-							className={styles.PagesBreak}
-							onClick={(e) => {
-								toggleHiddenList(e);
-							}}
-						>
-							{pageNumbers.length > 9 && '...'}
-						</a>
-					</li>
+					{!morePagesRequest && pageNumbers.length > 10 && (
+						<li>
+							<a
+								href="!#"
+								className={styles.PagesBreak}
+								onClick={(e) => {
+									toggleHiddenList(e);
+								}}
+							>
+								<FontAwesomeIcon
+									className={styles.ListOfPagesIcons}
+									icon={faPlus}
+								/>
+							</a>
+						</li>
+					)}
 					{pageNumbers.map((num) => {
 						if (num >= 10) {
 							return (
@@ -85,6 +98,22 @@ const Pagination = ({ totalDogs, dogsPerPage, paginate }) => {
 							);
 						}
 					})}
+					{morePagesRequest && pageNumbers.length > 10 && (
+						<li>
+							<a
+								href="!#"
+								className={styles.PagesBreak}
+								onClick={(e) => {
+									toggleHiddenList(e);
+								}}
+							>
+								<FontAwesomeIcon
+									className={styles.ListOfPagesIcons}
+									icon={faMinus}
+								/>
+							</a>
+						</li>
+					)}
 				</ul>
 			</nav>
 		</div>

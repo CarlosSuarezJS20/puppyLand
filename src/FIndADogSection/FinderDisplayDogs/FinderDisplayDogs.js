@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import SingleDogCard from '../SingleDogCard/SingleDogCard';
 import styles from './FinderDisplayDogs.module.css';
 import Pagination from '../../UI/Pagination/Pagination';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faDog } from '@fortawesome/free-solid-svg-icons';
 
 class FinderDisplayDogs extends Component {
 	state = {
@@ -29,9 +31,16 @@ class FinderDisplayDogs extends Component {
 		return (
 			<section className={styles.SearchDogsDisplayList}>
 				<div className={styles.SearchDogsDisplayHolder}>
-					{currentDogs.map((dog) => (
-						<SingleDogCard key={dog.id} item={dog} />
-					))}
+					{currentDogs.length > 0 ? (
+						currentDogs.map((dog) => <SingleDogCard key={dog.id} item={dog} />)
+					) : (
+						<div className={styles.NoFoundMessage}>
+							<span>
+								<FontAwesomeIcon className={styles.DogIcon} icon={faDog} />
+							</span>
+							Wuffy no puppies found!
+						</div>
+					)}
 				</div>
 				<Pagination
 					dogsPerPage={this.state.dogsPerPage}

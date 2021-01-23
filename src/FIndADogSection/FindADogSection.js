@@ -33,6 +33,7 @@ class FindADogSection extends Component {
 		advancedFilterRequested: false,
 		checkBoxes: [],
 		filter: { breedFor: [], temperaments: [], size: [] },
+		filtering: false,
 	};
 
 	componentDidUpdate() {
@@ -80,29 +81,35 @@ class FindADogSection extends Component {
 				checkBox.isChecked = false;
 			}
 		}
-
-		console.log(copyOfFilter);
-
-		this.setState({ checkBoxes: checkBoxesList });
+		this.setState({ checkBoxes: checkBoxesList, filtering: false });
 	};
 
 	searchRequestHandler = () => {
 		const filterCopy = this.state.filter;
-		console.log(filterCopy);
 
-		// REMODELS SERVERS DATA FOR FILTERING PURPOSES
-		const dogsCharacteristicsData = dataFromServerModelerUponSearch(
-			this.props.dogs
-		);
+		if (
+			filterCopy.breedFor.length === 0 &&
+			filterCopy.temperaments.length === 0 &&
+			filterCopy.size.length === 0
+		) {
+			this.setState({ filtering: false, formIsOpen: false });
+		} else {
+			// REMODELS SERVERS DATA FOR FILTERING PURPOSES
+			const dogsCharacteristicsData = dataFromServerModelerUponSearch(
+				this.props.dogs
+			);
 
-		console.log(dogsCharacteristicsData);
+			const resultsFromFilter = filterDataResults(
+				filterCopy,
+				dogsCharacteristicsData
+			);
 
-		const resultsFromFilter = filterDataResults(
-			filterCopy,
-			dogsCharacteristicsData
-		);
-
-		this.setState({ formIsOpen: false, results: [...resultsFromFilter] });
+			this.setState({
+				formIsOpen: false,
+				results: [...resultsFromFilter],
+				filtering: true,
+			});
+		}
 	};
 
 	onChangeCheckboxHandler = (event) => {
@@ -126,10 +133,15 @@ class FindADogSection extends Component {
 		let temperamentMainFilters;
 		let temperamentAdvancedFilter;
 		let heightFilters;
-		let filteredData;
+		let filteredDogData = this.props.dogs.filter((dog) => {
+			return this.state.results.includes(dog.id);
+		});
+
+		console.log(this.state);
 
 		if (this.props.dogs) {
 			// BREED_FOR FILTERS
+
 			this.props.dogs.filter((dog) => dog);
 
 			const initialDogsBreedForFilter = bredForFiltersArray(this.props.dogs);
@@ -223,12 +235,7 @@ class FindADogSection extends Component {
 		}
 
 		// Update Data for Displaying Dogs
-		if (this.state.results.length > 0) {
-			console.log(this.state.results);
-			filteredData = this.props.dogs.filter((dog) => {
-				return this.state.results.includes(dog.id);
-			});
-			console.log(filteredData);
+		if (this.state.results.length >= 0) {
 		}
 
 		// CLASSES
@@ -318,8 +325,9 @@ class FindADogSection extends Component {
 					</form>
 				</header>
 				<FinderDisplayDogs
-					data={filteredData ? filteredData : this.props.dogs}
+					data={this.state.filtering ? filteredDogData : this.props.dogs}
 				/>
+
 				<MainFooter />
 			</React.Fragment>
 		);
