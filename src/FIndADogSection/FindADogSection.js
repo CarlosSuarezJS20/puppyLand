@@ -341,10 +341,4 @@ const mapStateToProps = (state) => {
 	};
 };
 
-const mapDispatchToProps = (dispatch) => {
-	return {
-		onFetchDogs: () => dispatch(actions.fetchDogsFromServer()),
-	};
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(FindADogSection);
+export default connect(mapStateToProps, null)(FindADogSection);

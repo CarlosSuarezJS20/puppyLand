@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 // import DogsCarousel from '../DogsCarousel/DogsCarousel';
 // import MainFooter from '../MainFooter/MainFooter';
 import FindADogSection from '../FIndADogSection/FindADogSection';
+import DogDetailsPage from '../DogDetailsPage/DogDetailsPage';
 
 // THINGS TO DO:
 // Deal With Errors
@@ -42,7 +43,8 @@ class Home extends Component {
 				<MainInfoSection />
 				<HomeSearchBreedSection />
 				<DogsCarousel data={dogs} /> */}
-				<FindADogSection />
+				{/* <FindADogSection /> */}
+				<DogDetailsPage />
 				{/* <MainFooter /> */}
 			</React.Fragment>
 		);
