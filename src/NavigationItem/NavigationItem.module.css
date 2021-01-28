@@ -16,6 +16,13 @@
 	text-decoration: underline;
 }
 
+.Active {
+	transform: scale(1.2);
+	font-weight: bold;
+	color: white;
+	text-decoration: underline;
+}
+
 @media (min-width: 420px) {
 	.NavigationItem a {
 		font-size: 1.5rem;

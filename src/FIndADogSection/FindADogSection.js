@@ -7,6 +7,7 @@ import SectionDivider from '../UI/SectionDivider/SectionDivider';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import Loader from '../UI/Loader/Loader';
 
 import * as actions from '../store/actions/index';
 import { connect } from 'react-redux';
@@ -36,8 +37,14 @@ class FindADogSection extends Component {
 		filtering: false,
 	};
 
+	componentDidMount() {
+		window.scrollTo(0, 0);
+		this.props.onFetchDogs();
+	}
+
 	componentDidUpdate() {
 		// Handles the Filters state property update:
+		window.scrollTo(0, 0);
 		this.updateFiltersHandler();
 	}
 
@@ -98,6 +105,7 @@ class FindADogSection extends Component {
 			const dogsCharacteristicsData = dataFromServerModelerUponSearch(
 				this.props.dogs
 			);
+			console.log(this.props.dogs);
 
 			const resultsFromFilter = filterDataResults(
 				filterCopy,
@@ -136,8 +144,6 @@ class FindADogSection extends Component {
 		let filteredDogData = this.props.dogs.filter((dog) => {
 			return this.state.results.includes(dog.id);
 		});
-
-		console.log(this.state);
 
 		if (this.props.dogs) {
 			// BREED_FOR FILTERS
@@ -253,6 +259,7 @@ class FindADogSection extends Component {
 
 		return (
 			<React.Fragment>
+				<Loader />
 				<MainNavbar />
 				<header className={styles.FindADogFiltersSection}>
 					<h2>find your perfect puppy</h2>
@@ -341,4 +348,10 @@ const mapStateToProps = (state) => {
 	};
 };
 
-export default connect(mapStateToProps, null)(FindADogSection);
+const mapDispatchToProps = (dispatch) => {
+	return {
+		onFetchDogs: () => dispatch(actions.fetchDogsFromServer()),
+	};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(FindADogSection);

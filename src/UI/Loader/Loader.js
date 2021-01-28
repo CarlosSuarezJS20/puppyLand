@@ -5,18 +5,18 @@ import Spinner from '../Spinner/Spinner';
 class Loader extends Component {
 	componentDidMount() {
 		setTimeout(() => {
-			document.getElementById('loader').remove();
-		}, 2000);
+			document.getElementById('loader').style.transition = 'opacity 8s';
+			document.getElementById('loader').style.opacity = '0';
+
+			setTimeout(() => {
+				document.getElementById('loader').style.display = 'none';
+			}, 2000);
+		}, 100);
 	}
 
 	render() {
-		let spinnerClass = [styles.SpinnerHolder];
-
-		if (!this.props.remove) {
-			spinnerClass = [styles.SpinnerHolder, styles.RemoveSpinner];
-		}
 		return (
-			<div className={spinnerClass.join(' ')} id="loader">
+			<div className={styles.SpinnerHolder} id="loader">
 				<Spinner />
 			</div>
 		);

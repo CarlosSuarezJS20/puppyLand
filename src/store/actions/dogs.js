@@ -84,3 +84,12 @@ export const fetchOneDogFromServer = (id) => {
 			});
 	};
 };
+
+// Gets the id for the dog-details page
+
+export const getIdForDetailsPage = (id) => {
+	return {
+		type: actionTypes.GET_ID_FOR_DETAILS_PAGE,
+		id: id,
+	};
+};

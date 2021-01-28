@@ -4,6 +4,7 @@ import updateState from './utility';
 const initialState = {
 	dogs: [],
 	oneDog: [],
+	selectedDogId: null,
 	loading: true,
 	loadingDog: false,
 	error: null,
@@ -37,6 +38,10 @@ const fetchTheDogSucceeded = (state, action) => {
 	return updateState(state, { oneDog: action.dog, loadingDog: false });
 };
 
+const getIdForDetails = (state, action) => {
+	return updateState(state, { selectedDogId: action.id });
+};
+
 const reducer = (state = initialState, action) => {
 	switch (action.type) {
 		case actionTypes.FETCH_DOGS_START:
@@ -51,6 +56,8 @@ const reducer = (state = initialState, action) => {
 			return fetchTheDogFailed(state, action);
 		case actionTypes.FETCH_ONE_DOG_SUCCESS:
 			return fetchTheDogSucceeded(state, action);
+		case actionTypes.GET_ID_FOR_DETAILS_PAGE:
+			return getIdForDetails(state, action);
 		default:
 			return state;
 	}

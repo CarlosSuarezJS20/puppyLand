@@ -1,6 +1,8 @@
 import React from 'react';
 import styles from './HeroWelcomeSection.module.css';
 
+import { Link } from 'react-router-dom';
+
 const heroWelcomeSection = () => {
 	return (
 		<header className={styles.Hero}>
@@ -19,7 +21,7 @@ const heroWelcomeSection = () => {
 					what are you waiting for? <br />
 					get started now!
 				</p>
-				<a href="/#find">find yours</a>
+				<Link to="find-dog">find yours</Link>
 			</div>
 		</header>
 	);

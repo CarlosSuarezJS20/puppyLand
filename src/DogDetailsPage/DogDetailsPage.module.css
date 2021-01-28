@@ -5,14 +5,35 @@
 	padding: 3rem 1rem;
 }
 
+.GobackArrowHolder {
+	padding-top: 5rem;
+	background: rgb(243, 243, 243);
+	width: 100%;
+	text-align: right;
+}
+
+.GobackArrow {
+	cursor: pointer;
+	height: auto;
+	width: 30px;
+	margin-right: 4.5rem;
+}
+
 .imageHolder {
+	position: relative;
 	padding: 1.5rem;
 	border: 1px solid rgb(211, 0, 0);
 	border-radius: 10px;
 }
 
+.MeasurementFigure {
+	text-transform: lowercase;
+}
+
 .DogImage {
 	border: 0.5px solid black;
+	display: block;
+	width: 100%;
 	border-radius: 10px;
 }
 
@@ -108,7 +129,7 @@
 
 @media (min-width: 1100px) {
 	.DogDetailsHolder {
-		padding: 5rem 10rem;
+		padding: 3rem 10rem;
 	}
 
 	.InformationHolder {

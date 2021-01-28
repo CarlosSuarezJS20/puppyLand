@@ -23,8 +23,10 @@ const navigationItems = (props) => {
 					onClick={props.clicked}
 				/>
 			</div>
-			<NavigationItem>home</NavigationItem>
-			<NavigationItem>find a puppy</NavigationItem>
+			<NavigationItem link="/" exact>
+				home
+			</NavigationItem>
+			<NavigationItem link="/find-dog">find a puppy</NavigationItem>
 		</ul>
 	);
 };

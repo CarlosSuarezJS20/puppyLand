@@ -5,6 +5,8 @@ import Logo from '../Logo/Logo';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
+import { Link } from 'react-router-dom';
+
 const mainFooter = () => {
 	return (
 		<div>
@@ -13,10 +15,10 @@ const mainFooter = () => {
 					<header>
 						<h3>API: The Dogs API</h3>
 						<nav className={styles.MainFooterTopHeaderNav}>
-							<a href="/#home">Home</a>
-							<a href="/#search">
+							<Link to="/">Home</Link>
+							<Link to="/find-dog">
 								<FontAwesomeIcon icon={faSearch} />
-							</a>
+							</Link>
 						</nav>
 					</header>
 

@@ -1,17 +1,39 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styles from './SingleDogCard.module.css';
+import { Link } from 'react-router-dom';
 
-const SingleDogCard = (props) => {
-	return (
-		<a href="/#dog" className={styles.ImageContainer}>
-			<div className={styles.ItemsContainer}>
-				<img src={props.item.image.url} alt="dog" className={styles.Image} />
-				<div className={styles.InfoContainer}>
-					<h3>{props.item.name}</h3>
+import * as actions from '../../store/actions/index';
+import { connect } from 'react-redux';
+
+class SingleDogCard extends Component {
+	render() {
+		return (
+			<Link
+				to={{ pathname: `/dog-details/${this.props.item.name}` }}
+				className={styles.ImageContainer}
+				onClick={() => {
+					this.props.onGetIdForDetails(this.props.item.id);
+				}}
+			>
+				<div className={styles.ItemsContainer}>
+					<img
+						src={this.props.item.image.url}
+						alt="dog"
+						className={styles.Image}
+					/>
+					<div className={styles.InfoContainer}>
+						<h3>{this.props.item.name}</h3>
+					</div>
 				</div>
-			</div>
-		</a>
-	);
+			</Link>
+		);
+	}
+}
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		onGetIdForDetails: (id) => dispatch(actions.getIdForDetailsPage(id)),
+	};
 };
 
-export default SingleDogCard;
+export default connect(null, mapDispatchToProps)(SingleDogCard);

@@ -5,6 +5,8 @@ import styles from './Pagination.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 
+import { Link } from 'react-router-dom';
+
 const Pagination = ({ totalDogs, dogsPerPage, paginate }) => {
 	const [selected, setSelected] = useState('');
 	const [activateHiddenList, setActivateHiddenList] = useState(false);
@@ -41,8 +43,8 @@ const Pagination = ({ totalDogs, dogsPerPage, paginate }) => {
 						if (num < 10) {
 							return (
 								<li key={num}>
-									<a
-										href="!#"
+									<Link
+										to="/find-dog"
 										className={
 											selected === num ? styles.ActivePage : styles.Page
 										}
@@ -52,15 +54,15 @@ const Pagination = ({ totalDogs, dogsPerPage, paginate }) => {
 										}}
 									>
 										{num}
-									</a>
+									</Link>
 								</li>
 							);
 						}
 					})}
 					{!morePagesRequest && pageNumbers.length > 10 && (
 						<li>
-							<a
-								href="!#"
+							<Link
+								to="/find-dog"
 								className={styles.PagesBreak}
 								onClick={(e) => {
 									toggleHiddenList(e);
@@ -70,7 +72,7 @@ const Pagination = ({ totalDogs, dogsPerPage, paginate }) => {
 									className={styles.ListOfPagesIcons}
 									icon={faPlus}
 								/>
-							</a>
+							</Link>
 						</li>
 					)}
 					{pageNumbers.map((num) => {
@@ -82,8 +84,8 @@ const Pagination = ({ totalDogs, dogsPerPage, paginate }) => {
 										activateHiddenList ? styles.ShowPages : styles.HidePages
 									}
 								>
-									<a
-										href="!#"
+									<Link
+										to="/find-dog"
 										className={
 											selected === num ? styles.ActivePage : styles.Page
 										}
@@ -93,15 +95,15 @@ const Pagination = ({ totalDogs, dogsPerPage, paginate }) => {
 										}}
 									>
 										{num}
-									</a>
+									</Link>
 								</li>
 							);
 						}
 					})}
 					{morePagesRequest && pageNumbers.length > 10 && (
 						<li>
-							<a
-								href="!#"
+							<Link
+								to="/find-dog"
 								className={styles.PagesBreak}
 								onClick={(e) => {
 									toggleHiddenList(e);
@@ -111,7 +113,7 @@ const Pagination = ({ totalDogs, dogsPerPage, paginate }) => {
 									className={styles.ListOfPagesIcons}
 									icon={faMinus}
 								/>
-							</a>
+							</Link>
 						</li>
 					)}
 				</ul>

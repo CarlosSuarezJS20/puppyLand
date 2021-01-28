@@ -14,7 +14,6 @@ class DogsCarousel extends Component {
 
 	render() {
 		let dogsImg;
-		console.log(this.state.currentImageIndex);
 		const settings = {
 			className: 'center',
 			centerMode: true,
