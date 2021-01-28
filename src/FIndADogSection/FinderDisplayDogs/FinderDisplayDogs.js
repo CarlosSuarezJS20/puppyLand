@@ -12,6 +12,12 @@ class FinderDisplayDogs extends Component {
 		dogsPerPage: 9,
 	};
 
+	componentDidMount() {
+		setTimeout(() => {
+			document.getElementById('page-1').firstChild.click();
+		}, 1000);
+	}
+
 	paginateHandler = (pageNumber) => {
 		const page = pageNumber;
 		this.setState((prev) => (prev.currentPage = page));

@@ -105,7 +105,6 @@ class FindADogSection extends Component {
 			const dogsCharacteristicsData = dataFromServerModelerUponSearch(
 				this.props.dogs
 			);
-			console.log(this.props.dogs);
 
 			const resultsFromFilter = filterDataResults(
 				filterCopy,
@@ -118,6 +117,8 @@ class FindADogSection extends Component {
 				filtering: true,
 			});
 		}
+
+		document.getElementById('page-1').firstChild.click();
 	};
 
 	onChangeCheckboxHandler = (event) => {

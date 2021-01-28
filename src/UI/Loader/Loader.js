@@ -5,7 +5,7 @@ import Spinner from '../Spinner/Spinner';
 class Loader extends Component {
 	componentDidMount() {
 		setTimeout(() => {
-			document.getElementById('loader').style.transition = 'opacity 8s';
+			document.getElementById('loader').style.transition = 'opacity 5s';
 			document.getElementById('loader').style.opacity = '0';
 
 			setTimeout(() => {
