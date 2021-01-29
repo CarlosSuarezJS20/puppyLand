@@ -18,6 +18,7 @@ class DogDetailsPage extends Component {
 		let dog;
 		if (this.props.dog.length > 0) {
 			const [fetchedDog] = this.props.dog;
+			console.log(fetchedDog);
 			const { breeds } = fetchedDog;
 			const [dogInfo] = breeds;
 

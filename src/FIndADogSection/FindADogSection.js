@@ -117,7 +117,7 @@ class FindADogSection extends Component {
 				filtering: true,
 			});
 		}
-
+		// Ensures that first page of pagination is selected
 		document.getElementById('page-1').firstChild.click();
 	};
 

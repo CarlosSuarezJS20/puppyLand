@@ -3,7 +3,7 @@
 	width: 300px;
 	height: 200px;
 	border-radius: 20px;
-	margin: 0 auto;
+	margin: auto auto;
 	opacity: 0.6;
 	transition: 1s ease;
 }

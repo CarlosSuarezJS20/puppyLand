@@ -24,10 +24,8 @@ const Pagination = ({ totalDogs, dogsPerPage, paginate }) => {
 
 	const toggleHiddenList = () => {
 		if (morePagesRequest && activateHiddenList) {
-			console.log('here');
 			setActivateHiddenList(false);
 			setMorePagesResquest(false);
-			console.log(activateHiddenList, morePagesRequest);
 		} else {
 			setActivateHiddenList(true);
 			setMorePagesResquest(true);
@@ -60,8 +58,7 @@ const Pagination = ({ totalDogs, dogsPerPage, paginate }) => {
 					})}
 					{!morePagesRequest && pageNumbers.length > 10 && (
 						<li>
-							<NavLink
-								to="/find-dog"
+							<button
 								className={styles.PagesBreak}
 								onClick={() => {
 									toggleHiddenList();
@@ -71,7 +68,7 @@ const Pagination = ({ totalDogs, dogsPerPage, paginate }) => {
 									className={styles.ListOfPagesIcons}
 									icon={faPlus}
 								/>
-							</NavLink>
+							</button>
 						</li>
 					)}
 					{pageNumbers.map((num) => {
@@ -101,8 +98,7 @@ const Pagination = ({ totalDogs, dogsPerPage, paginate }) => {
 					})}
 					{morePagesRequest && pageNumbers.length > 10 && (
 						<li>
-							<NavLink
-								to="/find-dog"
+							<button
 								className={styles.PagesBreak}
 								onClick={(e) => {
 									toggleHiddenList(e);
@@ -112,7 +108,7 @@ const Pagination = ({ totalDogs, dogsPerPage, paginate }) => {
 									className={styles.ListOfPagesIcons}
 									icon={faMinus}
 								/>
-							</NavLink>
+							</button>
 						</li>
 					)}
 				</ul>
