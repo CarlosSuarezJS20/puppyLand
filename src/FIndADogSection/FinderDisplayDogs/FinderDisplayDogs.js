@@ -13,6 +13,7 @@ class FinderDisplayDogs extends Component {
 	};
 
 	componentDidMount() {
+		//selects first page upon loading
 		setTimeout(() => {
 			document.getElementById('page-1').firstChild.click();
 		}, 1000);

@@ -52,20 +52,20 @@ class DogDetailsPage extends Component {
 						</h2>
 						<div className={styles.ShareBarSection}>
 							<div className="item-details-header-info-share-buttons item-details-header-info-share-buttons__hide">
-								<a href="/eee">
+								<a href="/">
 									<img
 										src="https://simplesharebuttons.com/images/somacro/facebook.png"
 										alt="Facebook"
 									/>
 								</a>
-								<a href="/eee">
+								<a href="/">
 									<img
 										src="https://simplesharebuttons.com/images/somacro/pinterest.png"
 										alt="pinterest"
 									/>
 								</a>
 
-								<a href="/eee">
+								<a href="/">
 									<img
 										src="https://simplesharebuttons.com/images/somacro/twitter.png"
 										alt="Twitter"

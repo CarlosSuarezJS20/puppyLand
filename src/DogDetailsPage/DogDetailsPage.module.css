@@ -1,13 +1,13 @@
 .DogDetailsHolder {
 	display: grid;
-	background: rgb(243, 243, 243);
+	background: rgb(230, 230, 230);
 	grid-template-rows: 1fr;
 	padding: 1rem;
 }
 
 .GobackArrowHolder {
 	padding-top: 3rem;
-	background: rgb(243, 243, 243);
+	background: rgb(230, 230, 230);
 	width: 100%;
 	text-align: right;
 }
@@ -106,7 +106,7 @@
 
 	.imageHolder {
 		padding: 3rem;
-		border: 1px solid rgb(211, 0, 0);
+		border: 2px solid rgb(211, 0, 0);
 		border-radius: 10px;
 	}
 
@@ -147,7 +147,7 @@
 		max-width: 30vw;
 		max-height: 47vh;
 		padding: 1.5rem;
-		border: 1px solid rgb(211, 0, 0);
+		border: 2px solid rgb(211, 0, 0);
 		border-radius: 10px;
 		margin: 0 auto;
 	}

@@ -66,8 +66,6 @@
 	padding: 0.4rem 1rem;
 }
 
-/* line-height: 1.5; */
-
 @media (min-width: 780px) {
 	.Hero {
 		grid-template-columns: repeat(auto-fill, minmax(550px, 1fr));
@@ -123,7 +121,8 @@
 
 @media (min-width: 1300px) {
 	.Hero {
-		grid-template-columns: repeat(auto-fill, minmax(700px, 1fr));
+		padding: 0 10rem;
+		grid-template-columns: repeat(auto-fill, minmax(1fr, 1f));
 		background: linear-gradient(transparent, rgba(0, 0, 0, 0.6)),
 			url('../Assets/Images/45362eee6f344eb1d926a659a6cf3f62.jpg') center/cover
 				no-repeat;
