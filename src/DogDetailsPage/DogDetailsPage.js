@@ -17,8 +17,8 @@ class DogDetailsPage extends Component {
 	render() {
 		let dog;
 		if (this.props.dog.length > 0) {
+			console.log(this.props);
 			const [fetchedDog] = this.props.dog;
-			console.log(fetchedDog);
 			const { breeds } = fetchedDog;
 			const [dogInfo] = breeds;
 
@@ -52,20 +52,27 @@ class DogDetailsPage extends Component {
 						</h2>
 						<div className={styles.ShareBarSection}>
 							<div className="item-details-header-info-share-buttons item-details-header-info-share-buttons__hide">
-								<a href="/">
+								<a
+									href={`http://www.facebook.com/sharer.php?u=${
+										'https://puppyfinder-378cf.web.app/' +
+										this.props.match.params.name
+									}`}
+									rel="noopener noreferrer"
+									target="_blank"
+								>
 									<img
 										src="https://simplesharebuttons.com/images/somacro/facebook.png"
 										alt="Facebook"
 									/>
 								</a>
-								<a href="/">
-									<img
-										src="https://simplesharebuttons.com/images/somacro/pinterest.png"
-										alt="pinterest"
-									/>
-								</a>
-
-								<a href="/">
+								<a
+									href={`https://twitter.com/share?url=${
+										'https://puppyfinder-378cf.web.app/' +
+										this.props.match.params.name
+									}`}
+									rel="noopener noreferrer"
+									target="_blank"
+								>
 									<img
 										src="https://simplesharebuttons.com/images/somacro/twitter.png"
 										alt="Twitter"
